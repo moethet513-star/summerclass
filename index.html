@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Computer Basic Guide – Level 1</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Nunito',sans-serif;background:#f0f4ff;color:#2d2d2d;min-height:100vh}
+.book-container{max-width:820px;margin:0 auto;padding:16px}
+.cover{background:linear-gradient(135deg,#667eea,#764ba2);border-radius:24px;padding:40px 32px;text-align:center;margin-bottom:20px;position:relative;overflow:hidden;box-shadow:0 8px 32px rgba(102,126,234,.4)}
+.cover::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;background:rgba(255,255,255,.08);border-radius:50%}
+.cover::after{content:'';position:absolute;bottom:-40px;left:-40px;width:150px;height:150px;background:rgba(255,255,255,.06);border-radius:50%}
+.cover-badge{display:inline-block;background:rgba(255,255,255,.2);color:#fff;font-size:13px;font-weight:700;padding:6px 16px;border-radius:20px;margin-bottom:16px;letter-spacing:1px}
+.cover h1{font-family:'Fredoka One',cursive;font-size:38px;color:#fff;line-height:1.2;margin-bottom:8px;text-shadow:0 2px 8px rgba(0,0,0,.2)}
+.cover-sub{font-size:15px;color:rgba(255,255,255,.85);margin-bottom:24px}
+.chapter-nav{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;justify-content:center}
+.chap-btn{background:#fff;border:2px solid #e0e7ff;border-radius:50px;padding:8px 16px;font-family:'Nunito',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;color:#555}
+.chap-btn:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.1)}
+.chap-btn.active{color:#fff;border-color:transparent;box-shadow:0 4px 12px rgba(0,0,0,.2);transform:translateY(-2px)}
+.chapter{display:none;animation:fadeIn .4s ease}
+.chapter.visible{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.chapter-header{border-radius:20px;padding:28px 32px 24px;margin-bottom:16px;overflow:hidden}
+.chapter-header h2{font-family:'Fredoka One',cursive;font-size:28px;color:#fff;margin-bottom:6px}
+.chapter-header p{color:rgba(255,255,255,.85);font-size:14px}
+.card{background:#fff;border-radius:16px;padding:20px 24px;margin-bottom:14px;border:1.5px solid #f0f0f0;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.card h3{font-family:'Fredoka One',cursive;font-size:18px;margin-bottom:10px}
+.text-body{font-size:14px;line-height:1.7;color:#444}
+.progress-bar{height:6px;background:#e0e7ff;border-radius:3px;margin-bottom:20px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,#667eea,#764ba2);border-radius:3px;transition:width .5s ease}
+.illus-row{display:flex;gap:12px;flex-wrap:wrap;margin:12px 0}
+.illus-item{flex:1;min-width:120px;background:#f8faff;border-radius:14px;padding:16px 12px;text-align:center;border:1.5px solid #e8eeff}
+.illus-item .label{font-size:13px;font-weight:700;color:#444}
+.illus-item .desc{font-size:11px;color:#888;margin-top:2px}
+.cycle-row{display:flex;align-items:center;gap:6px;justify-content:center;flex-wrap:wrap;padding:16px 0}
+.cycle-step{border-radius:14px;padding:14px 20px;text-align:center;min-width:110px}
+.cycle-step .icon{font-size:28px;margin-bottom:4px}
+.cycle-step .name{font-family:'Fredoka One',cursive;font-size:15px}
+.cycle-step .ex{font-size:11px;margin-top:3px;opacity:.8}
+.cycle-arrow{font-size:24px;color:#aaa}
+.hw-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-top:12px}
+.hw-card{border-radius:14px;padding:14px;text-align:center;cursor:pointer;transition:transform .2s}
+.hw-card:hover{transform:scale(1.04)}
+.hw-card .hw-name{font-weight:800;font-size:14px}
+.hw-card .hw-desc{font-size:11px;margin-top:3px;opacity:.75}
+.fun-fact{border-radius:14px;padding:14px 18px;margin:12px 0;display:flex;align-items:flex-start;gap:12px;font-size:13px}
+.fun-fact-icon{font-size:24px;flex-shrink:0}
+.fun-fact-text{line-height:1.5}
+.fun-fact strong{display:block;font-size:14px;margin-bottom:3px}
+.sc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin-bottom:16px}
+.sc-item{background:#1a1a2e;border-radius:10px;padding:10px 14px;display:flex;align-items:center;gap:10px;cursor:pointer;transition:transform .15s,background .15s;user-select:none}
+.sc-item:hover{background:#22224a;transform:translateY(-2px)}
+.sc-item.active{background:#2a2a5a;transform:scale(0.96)}
+.sc-key{background:#16213e;border:1.5px solid #0f3460;border-radius:6px;color:#e94560;font-size:11px;font-weight:800;padding:4px 8px;font-family:monospace;white-space:nowrap;box-shadow:0 3px 0 #0f3460;transition:box-shadow .1s,transform .1s;flex-shrink:0}
+.sc-item.active .sc-key{box-shadow:0 1px 0 #0f3460;transform:translateY(2px)}
+.sc-desc{color:#a8dadc;font-size:12px;font-weight:700}
+.sc-demo{border-radius:12px;padding:16px 20px;min-height:80px;display:flex;align-items:center;gap:14px;background:#f8faff;border:1.5px solid #e0e7ff;transition:all .3s}
+.sc-demo-icon{font-size:32px;flex-shrink:0}
+.sc-demo-text strong{display:block;font-size:15px;font-weight:700;color:#333;margin-bottom:4px}
+.sc-demo-text p{font-size:13px;color:#666;margin:0;line-height:1.5}
+.sc-demo-anim{border-radius:8px;padding:8px 12px;font-size:12px;font-family:monospace;margin-top:8px;background:#1a1a2e;color:#e94560;font-weight:700}
+.ch1 .chapter-header{background:linear-gradient(135deg,#f093fb,#f5576c)}
+.ch1 .chap-btn.active,.ch1-nav.active{background:linear-gradient(135deg,#f093fb,#f5576c)}
+.ch2 .chapter-header{background:linear-gradient(135deg,#4facfe,#00f2fe)}
+.ch2 .chap-btn.active,.ch2-nav.active{background:linear-gradient(135deg,#4facfe,#00f2fe)}
+.ch3 .chapter-header{background:linear-gradient(135deg,#43e97b,#38f9d7)}
+.ch3 .chap-btn.active,.ch3-nav.active{background:linear-gradient(135deg,#43e97b,#38f9d7)}
+.ch4 .chapter-header{background:linear-gradient(135deg,#fa709a,#fee140)}
+.ch4 .chap-btn.active,.ch4-nav.active{background:linear-gradient(135deg,#fa709a,#fee140)}
+.ch5 .chapter-header{background:linear-gradient(135deg,#a18cd1,#fbc2eb)}
+.ch5 .chap-btn.active,.ch5-nav.active{background:linear-gradient(135deg,#a18cd1,#fbc2eb)}
+.ch6 .chapter-header{background:linear-gradient(135deg,#232526,#414345)}
+.ch6 .chap-btn.active,.ch6-nav.active{background:linear-gradient(135deg,#232526,#414345)}
+.ch6 .card h3{color:#e94560}
+.chq .chapter-header{background:linear-gradient(135deg,#f7971e,#ffd200)}
+.chq-nav.active{background:linear-gradient(135deg,#f7971e,#ffd200)}
+.ch1 .card h3{color:#f5576c}
+.ch2 .card h3{color:#0099cc}
+.ch3 .card h3{color:#1ab56e}
+.ch4 .card h3{color:#e85d9a}
+.ch5 .card h3{color:#7b5ccc}
+.chq .card h3{color:#c87800}
+.fake-desktop{background:linear-gradient(160deg,#1a6bab,#0d4f8a);border-radius:14px;overflow:hidden;border:2px solid #1a5c99}
+.fake-taskbar{background:rgba(0,0,0,.6);padding:6px 12px;display:flex;align-items:center;gap:8px;border-top:1px solid rgba(255,255,255,.1)}
+.start-btn{background:#0078d7;border:none;border-radius:4px;color:#fff;font-size:12px;font-weight:700;padding:4px 12px;cursor:pointer;font-family:'Nunito',sans-serif}
+.taskbar-item{background:rgba(255,255,255,.15);border-radius:4px;padding:3px 10px;color:#fff;font-size:11px}
+.desktop-area{padding:20px;min-height:160px;display:flex;flex-wrap:wrap;gap:16px;align-content:flex-start}
+.desk-icon{text-align:center;cursor:pointer;color:#fff;transition:transform .2s}
+.desk-icon:hover{transform:scale(1.1)}
+.desk-icon-img{font-size:32px;display:block;margin-bottom:4px}
+.desk-icon-name{font-size:11px;text-shadow:0 1px 3px rgba(0,0,0,.8)}
+.folder-demo{background:#fff8f0;border-radius:14px;border:2px dashed #f5a623;padding:16px;margin-top:10px}
+.folder-header{font-weight:800;font-size:15px;color:#f5a623;margin-bottom:10px}
+.file-list{display:flex;flex-wrap:wrap;gap:8px}
+.file-item{background:#fff;border-radius:8px;border:1.5px solid #e0e0e0;padding:8px 14px;font-size:12px;font-weight:700;color:#555;cursor:pointer;transition:all .2s}
+.file-item:hover{border-color:#f5a623;color:#f5a623;transform:translateY(-2px)}
+.sw-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+.sw-item{flex:1;min-width:120px;border-radius:14px;padding:14px;text-align:center}
+.sw-icon{font-size:32px;margin-bottom:6px}
+.sw-name{font-weight:800;font-size:14px}
+.sw-apps{font-size:11px;margin-top:4px;color:#666}
+.history-card{background:#fff;border-radius:16px;padding:0;margin-bottom:14px;border:2px solid #e0e7ff;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.history-trigger{width:100%;display:flex;align-items:center;gap:14px;padding:16px 20px;background:none;border:none;cursor:pointer;font-family:'Nunito',sans-serif;text-align:left;transition:background .2s}
+.history-trigger:hover{background:#f8faff}
+.history-trigger .ht-icon{font-size:36px;flex-shrink:0}
+.history-trigger .ht-year{font-family:'Fredoka One',cursive;font-size:22px;color:#667eea}
+.history-trigger .ht-name{font-weight:800;font-size:15px;color:#333}
+.history-trigger .ht-tagline{font-size:12px;color:#888;margin-top:2px}
+.history-trigger .ht-arrow{margin-left:auto;font-size:20px;color:#aaa;transition:transform .3s}
+.history-trigger.open .ht-arrow{transform:rotate(180deg)}
+.history-body{display:none;padding:0 20px 20px;animation:fadeIn .3s ease}
+.history-body.open{display:block}
+.history-body .hb-img{width:100%;border-radius:12px;margin-bottom:12px;border:1.5px solid #e0e7ff;overflow:hidden;background:#f0f4ff;padding:20px;text-align:center}
+.history-body p{font-size:13px;line-height:1.7;color:#444;margin-bottom:8px}
+.history-body .hb-facts{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.history-body .hb-fact{background:#eef0ff;border-radius:8px;padding:6px 12px;font-size:12px;font-weight:700;color:#4a4a9c}
+.how-works-btn{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;border:none;border-radius:10px;padding:8px 16px;font-family:'Nunito',sans-serif;font-size:13px;font-weight:700;cursor:pointer;margin-top:10px;transition:transform .2s}
+.how-works-btn:hover{transform:scale(1.04)}
+.how-panel{display:none;background:#f8faff;border-radius:12px;border:1.5px solid #e0e7ff;padding:16px;margin-top:12px;animation:fadeIn .3s ease}
+.how-panel.open{display:block}
+.how-step{display:flex;gap:12px;align-items:flex-start;margin-bottom:12px}
+.how-step-num{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:#fff;flex-shrink:0}
+.how-step-text{font-size:13px;line-height:1.6;color:#444;padding-top:4px}
+.how-step-text strong{color:#333;font-weight:800}
+/* Ch.6 styles */
+.rule-card{display:flex;gap:14px;align-items:flex-start;background:#fff;border-radius:14px;padding:16px 18px;margin-bottom:10px;border:1.5px solid #f0f0f0;box-shadow:0 2px 8px rgba(0,0,0,.04);cursor:pointer;transition:transform .2s,border-color .2s}
+.rule-card:hover{transform:translateY(-2px);border-color:#e94560}
+.rule-card.open{border-color:#e94560;background:#fff8f8}
+.rule-icon{font-size:32px;flex-shrink:0}
+.rule-title{font-family:'Fredoka One',cursive;font-size:16px;color:#e94560;margin-bottom:4px}
+.rule-short{font-size:13px;color:#555;line-height:1.5}
+.rule-detail{display:none;margin-top:10px;padding-top:10px;border-top:1.5px dashed #f5c6c6;font-size:13px;color:#444;line-height:1.7}
+.rule-card.open .rule-detail{display:block}
+.rule-badge{display:inline-block;background:#e94560;color:#fff;font-size:10px;font-weight:800;padding:2px 8px;border-radius:20px;margin-bottom:6px}
+.sm-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin:12px 0}
+.sm-card{border-radius:14px;padding:14px;text-align:center;cursor:pointer;transition:transform .2s}
+.sm-card:hover{transform:scale(1.05)}
+.sm-card .sm-icon{font-size:32px;margin-bottom:6px}
+.sm-card .sm-name{font-weight:800;font-size:14px}
+.sm-card .sm-age{font-size:11px;margin-top:3px;opacity:.8}
+.pw-bar-bg{background:#eee;border-radius:4px;height:10px;margin:6px 0;overflow:hidden}
+.pw-bar-fill{height:100%;border-radius:4px;transition:width .4s,background .4s}
+.pw-tip{font-size:12px;color:#666;margin-top:4px}
+.scenario-card{background:#fff;border-radius:14px;padding:18px 20px;margin-bottom:12px;border:2px solid #ffe0a0}
+.scenario-q{font-family:'Fredoka One',cursive;font-size:15px;color:#333;margin-bottom:12px}
+.scenario-opts{display:flex;flex-direction:column;gap:8px}
+.scenario-opt{background:#fff9f0;border:2px solid #ffe0a0;border-radius:10px;padding:10px 14px;font-size:13px;font-weight:700;cursor:pointer;text-align:left;font-family:'Nunito',sans-serif;transition:all .2s}
+.scenario-opt:hover:not(:disabled){border-color:#f7971e;background:#fff3e0}
+.scenario-opt.safe{background:#e6faf0;border-color:#2ecc71;color:#1a8a4e}
+.scenario-opt.danger{background:#fde8e8;border-color:#e74c3c;color:#c0392b}
+.scenario-result{margin-top:10px;padding:10px 12px;border-radius:8px;font-size:13px;font-weight:700;display:none}
+.scenario-result.show-safe{display:block;background:#e6faf0;color:#1a8a4e}
+.scenario-result.show-danger{display:block;background:#fde8e8;color:#c0392b}
+/* Quiz styles */
+.quiz-card{background:#fff;border-radius:16px;padding:20px 24px;border:2px solid #ffe0a0;margin-bottom:14px;position:relative}
+.quiz-number{position:absolute;top:-14px;left:20px;background:linear-gradient(135deg,#f7971e,#ffd200);color:#fff;font-family:'Fredoka One',cursive;font-size:14px;padding:4px 14px;border-radius:20px}
+.quiz-q{font-family:'Fredoka One',cursive;font-size:17px;margin-bottom:14px;color:#333;margin-top:8px}
+.quiz-options{display:flex;flex-direction:column;gap:8px}
+.quiz-opt{background:#fff9f0;border:2px solid #ffe0a0;border-radius:10px;padding:10px 16px;font-size:14px;font-weight:700;cursor:pointer;transition:all .2s;text-align:left;font-family:'Nunito',sans-serif}
+.quiz-opt:hover:not(:disabled){border-color:#f7971e;background:#fff3e0}
+.quiz-opt.correct{background:#e6faf0;border-color:#2ecc71;color:#1a8a4e}
+.quiz-opt.wrong{background:#fde8e8;border-color:#e74c3c;color:#c0392b}
+.quiz-result{margin-top:10px;font-weight:700;font-size:13px;padding:8px 12px;border-radius:8px;display:none}
+.quiz-result.show-correct{display:block;background:#e6faf0;color:#1a8a4e}
+.quiz-result.show-wrong{display:block;background:#fde8e8;color:#c0392b}
+.score-panel{background:linear-gradient(135deg,#f7971e,#ffd200);border-radius:20px;padding:32px 24px;text-align:center;margin:20px 0}
+.score-emoji{font-size:56px;margin-bottom:8px}
+.score-title{font-family:'Fredoka One',cursive;font-size:28px;color:#fff;margin-bottom:8px}
+.score-num{font-family:'Fredoka One',cursive;font-size:56px;color:#fff;line-height:1}
+.score-sub{color:rgba(255,255,255,.9);font-size:14px;margin-top:8px}
+.score-bars{display:flex;flex-direction:column;gap:8px;margin:20px 0;text-align:left}
+.score-bar-row{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:700;color:#fff}
+.score-bar-bg{flex:1;height:10px;background:rgba(255,255,255,.3);border-radius:5px;overflow:hidden}
+.score-bar-fill{height:100%;background:#fff;border-radius:5px;transition:width 1s ease}
+.retry-btn{background:#fff;color:#f7971e;border:none;border-radius:12px;padding:12px 32px;font-family:'Fredoka One',cursive;font-size:18px;cursor:pointer;margin-top:12px;transition:transform .2s}
+.retry-btn:hover{transform:scale(1.05)}
+.quiz-submit{background:linear-gradient(135deg,#f7971e,#ffd200);color:#fff;border:none;border-radius:12px;padding:14px 32px;font-family:'Fredoka One',cursive;font-size:18px;cursor:pointer;display:block;margin:20px auto 0;transition:transform .2s}
+.quiz-submit:hover{transform:scale(1.04)}
+.quiz-submit:disabled{opacity:.6;cursor:not-allowed}
+</style>
+</head>
+<body>
+<div class="book-container">
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-badge">📘 LEVEL 1 · BEGINNER</div>
+  <div style="width:160px;margin:0 auto 12px">
+    <svg width="160" height="120" viewBox="0 0 160 120">
+      <rect x="20" y="10" width="120" height="80" rx="8" fill="rgba(255,255,255,.15)" stroke="rgba(255,255,255,.4)" stroke-width="2"/>
+      <rect x="28" y="18" width="104" height="64" rx="4" fill="rgba(255,255,255,.1)"/>
+      <defs><linearGradient id="scr" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#a78bfa" stop-opacity=".5"/><stop offset="100%" stop-color="#60a5fa" stop-opacity=".3"/></linearGradient></defs>
+      <rect x="28" y="18" width="104" height="64" rx="4" fill="url(#scr)"/>
+      <rect x="36" y="28" width="60" height="6" rx="3" fill="rgba(255,255,255,.5)"/>
+      <rect x="36" y="40" width="88" height="4" rx="2" fill="rgba(255,255,255,.3)"/>
+      <rect x="36" y="50" width="72" height="4" rx="2" fill="rgba(255,255,255,.3)"/>
+      <rect x="36" y="60" width="50" height="4" rx="2" fill="rgba(255,255,255,.3)"/>
+      <rect x="68" y="90" width="24" height="10" rx="2" fill="rgba(255,255,255,.2)"/>
+      <rect x="52" y="98" width="56" height="6" rx="3" fill="rgba(255,255,255,.25)"/>
+      <circle cx="140" cy="20" r="3" fill="#ffd700" opacity=".8"/>
+      <circle cx="150" cy="45" r="2" fill="#ffd700" opacity=".6"/>
+      <circle cx="15" cy="60" r="2.5" fill="#ffd700" opacity=".7"/>
+    </svg>
+  </div>
+  <h1>Computer Basic Guide</h1>
+  <div class="cover-sub">Digital ခေတ်ရဲ့ လူငယ်တွေအတွက် · မရှိမဖြစ် လက်စွဲစာအုပ်</div>
+  <div style="background:rgba(255,255,255,.15);border-radius:12px;padding:10px 20px;font-size:13px;color:#fff;display:inline-block">🖥 BY EOM</div>
+</div>
+
+<div class="progress-bar"><div class="progress-fill" id="progress" style="width:14%"></div></div>
+
+<!-- NAV -->
+<div class="chapter-nav">
+  <button class="chap-btn ch1-nav" id="nav1" onclick="showChap(1)">🖥 Ch.1 ကွန်ပျူတာ</button>
+  <button class="chap-btn ch2-nav" id="nav2" onclick="showChap(2)">🔧 Ch.2 Hardware</button>
+  <button class="chap-btn ch3-nav" id="nav3" onclick="showChap(3)">💾 Ch.3 Software</button>
+  <button class="chap-btn ch4-nav" id="nav4" onclick="showChap(4)">🪟 Ch.4 Windows</button>
+  <button class="chap-btn ch5-nav" id="nav5" onclick="showChap(5)">📁 Ch.5 Files</button>
+  <button class="chap-btn ch6-nav" id="nav6" onclick="showChap(6)">🛡 Ch.6 Cyber</button>
+  <button class="chap-btn chq-nav" id="nav7" onclick="showChap(7)">🎯 Quiz!</button>
+</div>
+
+<!-- CH1 -->
+<div class="chapter ch1" id="ch1">
+  <div class="chapter-header"><h2>🖥 Chapter 1: ကွန်ပျူတာဆိုတာ ဘာလဲ?</h2><p>What is a Computer? — သူ့ရဲ့ အလုပ်လုပ်ပုံ</p></div>
+  <div class="card">
+    <h3>ကွန်ပျူတာ = Electronic Brain!</h3>
+    <p class="text-body">ကွန်ပျူတာဆိုတာ ဂိမ်းဆော့ဖို့ ဒါမှမဟုတ် စာရိုက်ဖို့သက်သက် မဟုတ်ဘူး — သူဟာ အချက်အလက်တွေကို တစ်စက္ကန့်မှာ <strong>billion</strong> ချီပြီး တွက်ချက်နိုင်တဲ့ Electronic Device တစ်ခုပါ!</p>
+    <button class="how-works-btn" onclick="toggleHow('how1')">⚙️ ကွန်ပျူတာ ဘယ်လို အလုပ်လုပ်သလဲ?</button>
+    <div class="how-panel" id="how1">
+      <div class="how-step"><div class="how-step-num" style="background:#f5576c">1</div><div class="how-step-text"><strong>Electricity ဝင်လာတယ်</strong> — Power button နှိပ်လိုက်တာနဲ့ Electric current တွေ Circuit ထဲ ဝင်ကာ CPU, RAM, Storage တွေ စပြီးအသက်ဝင်လာတယ်</div></div>
+      <div class="how-step"><div class="how-step-num" style="background:#4facfe">2</div><div class="how-step-text"><strong>BIOS/UEFI ပြေးတယ်</strong> — Motherboard ရဲ့ chip ထဲမှာ BIOS ဆိုတဲ့ tiny program ရှိပြီး hardware အကုန် စစ်ဆေးပေးတယ်</div></div>
+      <div class="how-step"><div class="how-step-num" style="background:#43e97b">3</div><div class="how-step-text"><strong>OS Load ဖြစ်တယ်</strong> — Storage (SSD/HDD) ထဲက Windows ကို RAM ထဲ ကူးတင်တယ်</div></div>
+      <div class="how-step"><div class="how-step-num" style="background:#a18cd1">4</div><div class="how-step-text"><strong>0 နဲ့ 1 တွက်တယ်</strong> — CPU မှာ transistor သန်းချီ ပါပြီး ON/OFF (1/0) ဖြင့် Calculation ထုတ်ပေးပါတယ်</div></div>
+      <div class="how-step"><div class="how-step-num" style="background:#f7971e">5</div><div class="how-step-text"><strong>မင်း မြင်ရတယ်</strong> — ရလဒ်ကို GPU → Monitor → မင်းဆီ ပေးပို့တယ်! ဒီ cycle ကို တစ်စက္ကန့်မှာ billion ကြိမ် ဖြစ်ပေတယ်!</div></div>
+    </div>
+    <div class="fun-fact" style="background:#fff0f8;border-left:4px solid #f5576c;margin-top:12px">
+      <div class="fun-fact-icon">🤩</div>
+      <div class="fun-fact-text" style="color:#c0392b"><strong>Did you know?</strong> မင်းရဲ့ CPU ဟာ တစ်စက္ကန့်မှာ <strong>3,000,000,000 ကြိမ်</strong> (3 GHz) အလုပ် လုပ်ဆောင်နိုင်တယ်! လူသားတွေ အကြိမ်ရေဆယ်ချက် ရေနိုင်တဲ့ အချိန်မှာ CPU က တစ်ဘီလျံချီ အထိတွက်ချက်နိုင်တယ်! 🚀</div>
+    </div>
+  </div>
+  <div class="card">
+    <h3>⚡ Input → Process → Output Cycle</h3>
+    <div class="cycle-row">
+      <div class="cycle-step" style="background:#fde8f0;color:#c0392b"><div class="icon">⌨️</div><div class="name">INPUT</div><div class="ex">Mouse နှိပ်တာ</div><div class="ex">Key ရိုက်တာ</div></div>
+      <div class="cycle-arrow">→</div>
+      <div class="cycle-step" style="background:#e8f4ff;color:#0066cc"><div class="icon">🧠</div><div class="name">PROCESS</div><div class="ex">CPU တွက်တယ်</div><div class="ex">RAM မှာ ထားတယ်</div></div>
+      <div class="cycle-arrow">→</div>
+      <div class="cycle-step" style="background:#e8faf0;color:#1a8a4e"><div class="icon">🖥</div><div class="name">OUTPUT</div><div class="ex">Screen ပြတယ်</div><div class="ex">Print ထုတ်တယ်</div></div>
+    </div>
+  </div>
+  <div class="card">
+    <h3>📜 ကွန်ပျူတာ သမိုင်းကြောင်း — Click လုပ်ပြီး ကြည့်ပါ!</h3>
+    <p class="text-body" style="margin-bottom:14px">ကွန်ပျူတာ ဆိုတာ ရုတ်တရက် ဖြစ်ပေါ်လာတာ မဟုတ်ဘူး — သူ့မှာ နှစ် ၁၀၀ ကျော် သမိုင်း ရှိပါတယ်!</p>
+    <div class="history-card">
+      <button class="history-trigger" onclick="toggleHistory(this)"><span class="ht-icon">🧮</span><div><div class="ht-year">1822</div><div class="ht-name">Babbage's Difference Engine</div><div class="ht-tagline">ပထမဆုံး Mechanical Computer</div></div><span class="ht-arrow">▼</span></button>
+      <div class="history-body"><p>Charles Babbage ဆိုတဲ့ ဗြိတိသျှ mathematician တစ်ယောက်က <strong>mechanical gears</strong> တွေသုံးပြီး ဂဏန်းတွက်ချက်မှု ဖြေရှင်းနိုင်တဲ့ engine ကြီးကို တည်ဆောက်ခဲ့တယ်။  ဒါဟာ ကွန်ပျူတာ သမိုင်းရဲ့ ပထမဦးဆုံး chapter ပါ!!</p><div class="hb-facts"><span class="hb-fact">⚙️ Gears သုံး</span><span class="hb-fact">📐 ဂဏန်းတွက်ဖို့</span><span class="hb-fact">🇬🇧 UK မှာ တည်ဆောက်</span></div></div>
+    </div>
+    <div class="history-card">
+      <button class="history-trigger" onclick="toggleHistory(this)"><span class="ht-icon">🏛️</span><div><div class="ht-year">1945</div><div class="ht-name">ENIAC — ပထမဆုံး Electronic Computer</div><div class="ht-tagline">အိမ်ကြီးလောက် ရှိတဲ့ Computer!</div></div><span class="ht-arrow">▼</span></button>
+      <div class="history-body"><p>အမေရိကန် Pennsylvania တက္ကသိုလ်မှာ တည်ဆောက်ခဲ့တဲ့ ENIAC ဟာ ပထမဆုံး <strong>Electronic Computer</strong> ပါ။ သူ့မှာ <strong>18,000 vacuum tubes</strong>  ရှိပြီး ၂ ကြိမ် နှိပ်ချိန်မှာ multiplication တစ်ခုကို တွက်နိုင်ခဲ့တယ်! ဒါပေမဲ့ Room တစ်ခုလုံး ကျယ်ပြီး 27 tonnes ထိရှိပါတယ်!</p><div class="hb-facts"><span class="hb-fact">🏠 167m² ကျယ်</span><span class="hb-fact">💡 18,000 Tubes</span><span class="hb-fact">🇺🇸 USA</span></div></div>
+    </div>
+    <div class="history-card">
+      <button class="history-trigger" onclick="toggleHistory(this)"><span class="ht-icon">🍎</span><div><div class="ht-year">1984</div><div class="ht-name">Apple Macintosh — Desktop Revolution</div><div class="ht-tagline">Mouse + GUI ကို လူတိုင်းသုံးလာစ</div></div><span class="ht-arrow">▼</span></button>
+      <div class="history-body"><p>Steve Jobs ဦးဆောင်တဲ့ Apple က <strong>Mouse</strong> နဲ့ <strong>GUI</strong> ကို ထည့်သွင်းပြီး Command ရိုက်စရာ မလိုတော့တဲ့ Mac ကို launch လုပ်ခဲ့တယ်!</p><div class="hb-facts"><span class="hb-fact">🖱 ပထမ Mouse GUI</span><span class="hb-fact">💰 $2,495 (1984)</span></div></div>
+    </div>
+    <div class="history-card">
+      <button class="history-trigger" onclick="toggleHistory(this)"><span class="ht-icon">💻</span><div><div class="ht-year">1991</div><div class="ht-name">World Wide Web — Internet မွေးဖွားတယ်</div><div class="ht-tagline">Tim Berners-Lee ရဲ့ လက်ဆောင်</div></div><span class="ht-arrow">▼</span></button>
+      <div class="history-body"><p>Tim Berners-Lee က <strong>HTML, URL, HTTP</strong> ကို တီထွင်ပြီး ကျွန်ုပ်တို့ ယနေ့ သုံးနေတဲ့ Internet ကို ဖန်တီးခဲ့တယ်။ ဒါမှ Google, YouTube, Facebook ဆိုတဲ့ အရာအားလုံး ဖြစ်လာနိုင်ခဲ့တာပါ!</p><div class="hb-facts"><span class="hb-fact">🌐 HTML တီထွင်</span><span class="hb-fact">🇬🇧 Tim Berners-Lee</span><span class="hb-fact">📡 CERN မှာ</span></div></div>
+    </div>
+    <div class="history-card">
+      <button class="history-trigger" onclick="toggleHistory(this)"><span class="ht-icon">📱</span><div><div class="ht-year">2007</div><div class="ht-name">iPhone — ကွန်ပျူတာ Pocket ထဲ ဝင်တယ်</div><div class="ht-tagline">Steve Jobs ကမ္ဘာကြီးကို ပြောင်းလဲ</div></div><span class="ht-arrow">▼</span></button>
+      <div class="history-body"><p>Steve Jobs က 2007 မှာ iPhone ကို မိတ်ဆက်ပြီး <strong>Smartphone</strong> ခေတ်ကို စတင်ခဲ့တယ်! ယနေ့ ၆ ဘီလျံ ကျော် Smartphone သုံးနေကြပြီ!</p><div class="hb-facts"><span class="hb-fact">📱 Touchscreen</span><span class="hb-fact">6B+ users</span></div></div>
+    </div>
+  </div>
+  <div class="card">
+    <h3>🖥 ကွန်ပျူတာ အမျိုးအစားများ</h3>
+    <div class="illus-row">
+      <div class="illus-item"><div style="font-size:32px;margin-bottom:6px">🖥</div><div class="label">Desktop PC</div><div class="desc">အိမ်မှာ ထားသုံးသော PC</div></div>
+      <div class="illus-item"><div style="font-size:32px;margin-bottom:6px">💻</div><div class="label">Laptop</div><div class="desc">သယ်လို့ ရသော PC</div></div>
+      <div class="illus-item"><div style="font-size:32px;margin-bottom:6px">📱</div><div class="label">Smartphone</div><div class="desc">Pocket ထဲ ထည့်သယ်နိုင်</div></div>
+      <div class="illus-item"><div style="font-size:32px;margin-bottom:6px">🗄️</div><div class="label">Server</div><div class="desc">Internet data သိမ်းသော</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- CH2 -->
+<div class="chapter ch2" id="ch2">
+  <div class="chapter-header"><h2>🔧 Chapter 2: Hardware</h2><p>The Physical Parts — လက်နဲ့ ကိုင်တွယ်လို့ ရတဲ့ အစိတ်အပိုင်းများ</p></div>
+  <div class="card">
+    <h3>🖱 Input Devices</h3>
+    <p class="text-body" style="margin-bottom:10px">ကွန်ပျူတာကို Data ထည့်သွင်းတဲ့ ကိရိယာများ</p>
+    <div class="hw-grid">
+      <div class="hw-card" style="background:#e8f4ff" onclick="showHwDetail('keyboard')"><div style="font-size:28px;margin-bottom:6px">⌨️</div><div class="hw-name" style="color:#0099cc">Keyboard</div><div class="hw-desc">စာရိုက်သော ကိရိယာ</div></div>
+      <div class="hw-card" style="background:#e8f4ff" onclick="showHwDetail('mouse')"><div style="font-size:28px;margin-bottom:6px">🖱</div><div class="hw-name" style="color:#0099cc">Mouse</div><div class="hw-desc">Cursor ရွှေ့သော ကိရိယာ</div></div>
+      <div class="hw-card" style="background:#e8f4ff" onclick="showHwDetail('mic')"><div style="font-size:28px;margin-bottom:6px">🎤</div><div class="hw-name" style="color:#0099cc">Microphone</div><div class="hw-desc">အသံ ထည့်သော ကိရိယာ</div></div>
+      <div class="hw-card" style="background:#e8f4ff" onclick="showHwDetail('webcam')"><div style="font-size:28px;margin-bottom:6px">📸</div><div class="hw-name" style="color:#0099cc">Webcam</div><div class="hw-desc">ဗီဒီယိုကော်လ် ရိုက်ကူး</div></div>
+    </div>
+    <div id="hw-detail" style="display:none;background:#f0f8ff;border-radius:12px;padding:14px;margin-top:12px;border-left:4px solid #4facfe;font-size:13px;color:#333;line-height:1.6"></div>
+  </div>
+  <div class="card">
+    <h3>🧠 CPU — ကွန်ပျူတာရဲ့ ဦးနှောက်</h3>
+    <p class="text-body">CPU (Central Processing Unit) ဆိုတာ ကွန်ပျူတာရဲ့ ဦးနှောက်ပါ — Input တွေကို ယူပြီး တွက်ချက်ကာ Output ထုတ်ပေးပါတယ်။</p>
+    <button class="how-works-btn" onclick="toggleHow('howcpu')">⚙️ CPU ဘယ်လို အလုပ်လုပ်သလဲ?</button>
+    <div class="how-panel" id="howcpu">
+      <div class="how-step"><div class="how-step-num" style="background:#4facfe">1</div><div class="how-step-text"><strong>Fetch</strong> — RAM ထဲကနေ next instruction ကို ဆွဲထုတ်တယ်</div></div>
+      <div class="how-step"><div class="how-step-num" style="background:#43e97b">2</div><div class="how-step-text"><strong>Decode</strong> — Instruction ကို 0/1 binary signal တွေ အဖြစ် ပြောင်းတယ်</div></div>
+      <div class="how-step"><div class="how-step-num" style="background:#f7971e">3</div><div class="how-step-text"><strong>Execute</strong> — ALU က တွက်ချက်မှုကို လုပ်တယ် (+, -, ×, ÷)</div></div>
+      <div class="how-step"><div class="how-step-num" style="background:#a18cd1">4</div><div class="how-step-text"><strong>Store</strong> — ရလဒ်ကို Register ဒါမှမဟုတ် RAM ထဲ ထည့်ထားတယ်</div></div>
+      <div style="background:#fff;border-radius:10px;padding:10px;margin-top:8px;font-size:12px;color:#666;border:1px solid #e0e7ff">💡 ဒီ cycle ကို "<strong>Fetch-Decode-Execute</strong>" cycle လို့ ခေါ်ပြီး Modern CPU တစ်လုံးမှာ ဒီ cycle ကို တစ်စက္ကန့်မှာ <strong>billions</strong> ကြိမ် ပြုလုပ်နိုင်ပါတယ်!</div>
+    </div>
+    <div class="illus-row" style="margin-top:12px">
+      <div class="illus-item" style="background:#fff3e0"><div style="font-size:24px;margin-bottom:4px">🔵</div><div class="label" style="color:#c87800">Intel Core i5/i7</div><div class="desc">Office/School PC</div></div>
+      <div class="illus-item" style="background:#f3e5f5"><div style="font-size:24px;margin-bottom:4px">🟣</div><div class="label" style="color:#6c3483">AMD Ryzen</div><div class="desc">Gaming PC</div></div>
+      <div class="illus-item" style="background:#e8f5e9"><div style="font-size:24px;margin-bottom:4px">⬛</div><div class="label" style="color:#1a5276">Apple M-Series</div><div class="desc">Mac / MacBook</div></div>
+    </div>
+  </div>
+  <div class="card">
+    <h3>📺 Output Devices</h3>
+    <div class="hw-grid">
+      <div class="hw-card" style="background:#e8faf0"><div style="font-size:28px;margin-bottom:6px">🖥</div><div class="hw-name" style="color:#1a8a4e">Monitor</div><div class="hw-desc">မျက်နှာပြင်ပေါ် ပြသော</div></div>
+      <div class="hw-card" style="background:#e8faf0"><div style="font-size:28px;margin-bottom:6px">🔊</div><div class="hw-name" style="color:#1a8a4e">Speaker</div><div class="hw-desc">အသံ ထွက်သော ကိရိယာ</div></div>
+      <div class="hw-card" style="background:#e8faf0"><div style="font-size:28px;margin-bottom:6px">🖨️</div><div class="hw-name" style="color:#1a8a4e">Printer</div><div class="hw-desc">Paper ပေါ် ထုတ်ပေးသော</div></div>
+    </div>
+  </div>
+  <div class="card">
+    <h3>💾 Storage — SSD vs HDD</h3>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px">
+      <div style="flex:1;min-width:200px;background:#e8ffe8;border-radius:12px;padding:16px;border-left:4px solid #2ecc71">
+        <div style="font-size:24px;margin-bottom:6px">⚡</div>
+        <div style="font-weight:800;color:#1a8a4e;margin-bottom:6px">SSD (Solid State Drive)</div>
+        <div style="font-size:12px;color:#555;line-height:1.7">• Flash Memory Chip သုံး<br>• ပိုမြန်တယ် (10x faster)<br>• Moving parts မပါ<br>• ဈေးနှုန်း ပိုကြီး</div>
+        <button class="how-works-btn" style="margin-top:8px;font-size:11px;padding:6px 12px" onclick="toggleHow('howssd')">⚙️ SSD ဘယ်လို အလုပ်လုပ်သလဲ?</button>
+        <div class="how-panel" id="howssd" style="font-size:12px">Data ကို <strong>NAND Flash Memory</strong> chip တွေထဲမှာ electrical charge အဖြစ် သိမ်းတယ်။ Moving parts မပါတာကြောင့် အမြန်ဆုံး access လုပ်နိုင်ပြီး ခံနိုင်ရည်လည်း ကောင်းပါတယ်!</div>
+      </div>
+      <div style="flex:1;min-width:200px;background:#fff3e0;border-radius:12px;padding:16px;border-left:4px solid #f5a623">
+        <div style="font-size:24px;margin-bottom:6px">🗄️</div>
+        <div style="font-weight:800;color:#c87800;margin-bottom:6px">HDD (Hard Disk Drive)</div>
+        <div style="font-size:12px;color:#555;line-height:1.7">• Magnetic Disk သုံး<br>• နှေးကွေး<br>• Disk ပတ်ရသော Motor ပါ<br>• ဈေးနှုန်း ချိုသာ</div>
+        <button class="how-works-btn" style="margin-top:8px;font-size:11px;padding:6px 12px;background:linear-gradient(135deg,#f5a623,#f7971e)" onclick="toggleHow('howhdd')">⚙️ HDD ဘယ်လို အလုပ်လုပ်သလဲ?</button>
+        <div class="how-panel" id="howhdd" style="font-size:12px">Magnetic coating ပါတဲ့ <strong>spinning disk</strong> ပေါ်မှာ Read/Write head က ရွှေ့ကာ data ဖတ်/ရေးတယ်။ CD တစ်ချပ်ပတ်သလို disk ကိုပတ်ပြီး data ရတာ ဆိုတော့ SSD ထက် ပိုနှေးပါတယ်!</div>
+      </div>
+    </div>
+    <div class="fun-fact" style="background:#e8f4ff;border-left:4px solid #4facfe;margin-top:12px">
+      <div class="fun-fact-icon">💡</div>
+      <div class="fun-fact-text" style="color:#0066cc"><strong>Speed!</strong> SSD က Windows ကို 8-10 seconds မှာ ဖွင့်နိုင်ပြီး HDD က 30-60 seconds ကြာနိုင်ပါတယ်!</div>
+    </div>
+  </div>
+</div>
+
+<!-- CH3 -->
+<div class="chapter ch3" id="ch3">
+  <div class="chapter-header"><h2>💾 Chapter 3: Software</h2><p>The Digital Brain — မမြင်ရသော မရှိမဖြစ်သော!</p></div>
+  <div class="card">
+    <h3>Software ဆိုတာ ဘာလဲ?</h3>
+    <p class="text-body">Software ကို မျက်စိနဲ့ မြင်မရ၊ လက်နဲ့ မကိုင်ရ — ဒါပေမဲ့ Software မရှိရင် Hardware က သံတိုသံစပါပဲ! Software ဟာ ကွန်ပျူတာကို "ဘာလုပ်ရမလဲ" ဆိုပြီး ပြောပေးတဲ့ Instructions တွေပါ။</p>
+    <button class="how-works-btn" onclick="toggleHow('howsw')">⚙️ Software ဘယ်လို Run သလဲ?</button>
+    <div class="how-panel" id="howsw">
+      <div class="how-step"><div class="how-step-num" style="background:#43e97b">1</div><div class="how-step-text"><strong>Program ကို ဖွင့်တယ်</strong> — Storage ထဲက program file တွေကို RAM ထဲ ကူးတင်တယ်</div></div>
+      <div class="how-step"><div class="how-step-num" style="background:#1ab56e">2</div><div class="how-step-text"><strong>CPU ကို ညွှန်ကြားတယ်</strong> — Instructions (code) တွေကို CPU ဆီ တစ်ကြောင်းချင်း ပို့တယ်</div></div>
+      <div class="how-step"><div class="how-step-num" style="background:#667eea">3</div><div class="how-step-text"><strong>Result ပြပေးတယ်</strong> — CPU ရဲ့ ရလဒ်ကို Screen, Speaker, Printer ဆီ ပြန်ပို့ပြီး မြင်ရ/ကြားရတယ်</div></div>
+    </div>
+  </div>
+  <div class="card">
+    <h3>Software အမျိုးအစား ၂ မျိုး</h3>
+    <div class="sw-row">
+      <div class="sw-item" style="background:#e8faf0;border:2px solid #2ecc71">
+        <div class="sw-icon">👑</div>
+        <div class="sw-name" style="color:#1a8a4e">System Software</div>
+        <div style="font-size:12px;color:#666;margin:6px 0">ကွန်ပျူတာ တစ်ခုလုံးကို ထိန်းချုပ်သော <strong>Boss</strong></div>
+        <div class="sw-apps">Windows 11 · macOS · Ubuntu</div>
+        <div style="margin-top:8px;background:#d5f5e3;border-radius:8px;padding:6px;font-size:11px;color:#1a8a4e">⚡ ကွန်ပျူတာ ဖွင့်တာနဲ့ ပထမဆုံး Run</div>
+      </div>
+      <div class="sw-item" style="background:#e8f4ff;border:2px solid #4facfe">
+        <div class="sw-icon">📱</div>
+        <div class="sw-name" style="color:#0099cc">Application Software</div>
+        <div style="font-size:12px;color:#666;margin:6px 0">ကျွန်ုပ်တို့ <strong>တကယ်သုံးသော</strong> Apps</div>
+        <div class="sw-apps">Chrome · Photoshop · Minecraft</div>
+        <div style="margin-top:8px;background:#d6eaf8;border-radius:8px;padding:6px;font-size:11px;color:#1a5276">🎮 System Software ပေါ်မှာ Run</div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <h3>🌐 ကျော်ကြားသော Applications</h3>
+    <div class="hw-grid">
+      <div class="hw-card" style="background:#e8f4ff"><div style="font-size:28px;margin-bottom:6px">🌐</div><div class="hw-name" style="color:#0099cc">Web Browser</div><div class="hw-desc">Chrome, Edge, Firefox</div></div>
+      <div class="hw-card" style="background:#fde8f8"><div style="font-size:28px;margin-bottom:6px">🎨</div><div class="hw-name" style="color:#c044a0">Creative</div><div class="hw-desc">Photoshop, Premiere</div></div>
+      <div class="hw-card" style="background:#e8faf0"><div style="font-size:28px;margin-bottom:6px">📝</div><div class="hw-name" style="color:#1a8a4e">Office</div><div class="hw-desc">Word, Excel, PowerPoint</div></div>
+      <div class="hw-card" style="background:#fff3e0"><div style="font-size:28px;margin-bottom:6px">🎮</div><div class="hw-name" style="color:#c87800">Games</div><div class="hw-desc">Minecraft, Roblox</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- CH4 -->
+<div class="chapter ch4" id="ch4">
+  <div class="chapter-header"><h2>🪟 Chapter 4: Windows OS</h2><p>Desktop မျက်နှာပြင်ကို ကျွမ်းကျင်ဖို့!</p></div>
+  <div class="card">
+    <h3>Windows Desktop ဆိုတာ</h3>
+    <p class="text-body" style="margin-bottom:14px">ကွန်ပျူတာ ဖွင့်တာနဲ့ မြင်ရတဲ့ မျက်နှာပြင်ကို <strong>Desktop</strong> လို့ ခေါ်ပါတယ်! Icons တွေကို click လုပ်ကြည့်ပါ 👇</p>
+    <div class="fake-desktop">
+      <div class="desktop-area">
+        <div class="desk-icon" onclick="deskClick('thispc')"><span class="desk-icon-img">🖥</span><div class="desk-icon-name">This PC</div></div>
+        <div class="desk-icon" onclick="deskClick('recycle')"><span class="desk-icon-img">🗑</span><div class="desk-icon-name">Recycle Bin</div></div>
+        <div class="desk-icon" onclick="deskClick('chrome')"><span class="desk-icon-img">🌐</span><div class="desk-icon-name">Chrome</div></div>
+        <div class="desk-icon" onclick="deskClick('docs')"><span class="desk-icon-img">📁</span><div class="desk-icon-name">My Docs</div></div>
+        <div class="desk-icon" onclick="deskClick('settings')"><span class="desk-icon-img">⚙️</span><div class="desk-icon-name">Settings</div></div>
+      </div>
+      <div class="fake-taskbar">
+        <button class="start-btn" onclick="deskClick('start')">⊞ Start</button>
+        <div class="taskbar-item">🌐 Chrome</div>
+        <div class="taskbar-item">📁 Files</div>
+        <div style="flex:1"></div>
+        <div class="taskbar-item" style="font-size:10px">🔊 📶 🔋 3:45 PM</div>
+      </div>
+    </div>
+    <div id="desk-popup" style="display:none;background:#fff3e0;border-radius:10px;padding:12px;margin-top:10px;border-left:4px solid #f7971e;font-size:13px;color:#555;line-height:1.6"></div>
+  </div>
+  <div class="card">
+    <h3>🗺 Windows Interface အပိုင်းများ</h3>
+    <div class="illus-row">
+      <div class="illus-item"><div style="font-size:28px;margin-bottom:6px">🖥</div><div class="label">Desktop</div><div class="desc">Main screen</div></div>
+      <div class="illus-item"><div style="font-size:28px;margin-bottom:6px">📊</div><div class="label">Taskbar</div><div class="desc">အောက်ခြေ bar</div></div>
+      <div class="illus-item"><div style="font-size:28px;margin-bottom:6px">⊞</div><div class="label">Start Menu</div><div class="desc">တံခါးပေါက်</div></div>
+      <div class="illus-item"><div style="font-size:28px;margin-bottom:6px">🔍</div><div class="label">Search Box</div><div class="desc">ရှာဖွေသောနေရာ</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- CH5 -->
+<div class="chapter ch5" id="ch5">
+  <div class="chapter-header"><h2>📁 Chapter 5: Files &amp; Folders</h2><p>Professional ကျတဲ့ ကွန်ပျူတာ အသုံးပြုနည်း!</p></div>
+  <div class="card">
+    <h3>Files နဲ့ Folders ဆိုတာ</h3>
+    <div class="illus-row">
+      <div class="illus-item" style="background:#fff8f0;flex:2"><div style="font-size:32px;margin-bottom:6px">📄</div><div class="label">File</div><div class="desc">ဓာတ်ပုံ, သီချင်း, Essay</div><div style="margin-top:8px;display:flex;gap:4px;flex-wrap:wrap;justify-content:center"><span style="background:#4facfe22;color:#0066cc;border-radius:4px;padding:2px 6px;font-size:10px;font-weight:700">.jpg</span><span style="background:#2ecc7122;color:#1a8a4e;border-radius:4px;padding:2px 6px;font-size:10px;font-weight:700">.mp3</span><span style="background:#f5a62322;color:#c87800;border-radius:4px;padding:2px 6px;font-size:10px;font-weight:700">.docx</span><span style="background:#9b59b622;color:#6c3483;border-radius:4px;padding:2px 6px;font-size:10px;font-weight:700">.pdf</span></div></div>
+      <div class="illus-item" style="background:#fffbe8;flex:2"><div style="font-size:32px;margin-bottom:6px">📁</div><div class="label">Folder</div><div class="desc">Files တွေကို စုထည့်သော "အိတ်"</div></div>
+    </div>
+  </div>
+  <div class="card">
+    <h3>✏️ Naming Rules</h3>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <div style="flex:1;background:#fde8e8;border-radius:12px;padding:14px;border-left:4px solid #e74c3c"><div style="font-weight:800;color:#c0392b;margin-bottom:6px">❌ မကောင်းသော</div><div style="font-size:12px;color:#666;line-height:1.8"><div>• Final.docx</div><div>• Final_FINAL.docx</div><div>• untitled123.docx</div></div></div>
+      <div style="flex:1;background:#e8faf0;border-radius:12px;padding:14px;border-left:4px solid #2ecc71"><div style="font-weight:800;color:#1a8a4e;margin-bottom:6px">✅ ကောင်းသော</div><div style="font-size:12px;color:#666;line-height:1.8"><div>• Assignment_English_Jan2024</div><div>• Math_Homework_Ch3</div><div>• Photo_GradDay_2024</div></div></div>
+    </div>
+  </div>
+  <div class="card">
+    <h3>⌨️ Power Shortcuts — နှိပ်ပြီး ကြည့်ပါ!</h3>
+    <div class="sc-grid" id="sc-grid"></div>
+    <div class="sc-demo">
+      <div class="sc-demo-icon" id="sc-icon">⌨️</div>
+      <div class="sc-demo-text">
+        <strong id="sc-title">Shortcut တစ်ခုကို နှိပ်ပြီး လေ့လာပါ</strong>
+        <p id="sc-info" style="font-size:13px;color:#666;margin:4px 0 0"></p>
+        <div class="sc-demo-anim" id="sc-anim" style="display:none"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CH6 CYBER SECURITY -->
+<div class="chapter ch6" id="ch6">
+  <div class="chapter-header"><h2>🛡 Chapter 6: Social Media & Cyber Security</h2><p>အင်တာနက်ကမ္ဘာမှာ လုံလုံခြုံခြုံ နေနိုင်ဖို့ — Stay Safe Online!</p></div>
+
+  <div class="card">
+    <h3>📱 Social Media ဆိုတာ ဘာလဲ?</h3>
+    <p class="text-body" style="margin-bottom:12px">အင်တာနက်ပေါ်ကနေ သူငယ်ချင်းတွေ၊ မိသားစုတွေနဲ့ စကားပြောတာ၊ ဓာတ်ပုံ/ဗီဒီယိုဝေမျှတာတွေ လုပ်နိုင်တဲ့ နေရာတွေပါ — ဒါပေမဲ့ သတိထားစရာ အန္တရာယ်တွေလည်း ရှိပါတယ်!</p>
+    <div class="sm-grid">
+      <div class="sm-card" style="background:#ffeaea" onclick="showSmDetail('youtube')"><div class="sm-icon">▶️</div><div class="sm-name" style="color:#cc0000">YouTube</div><div class="sm-age">Age: 13+</div></div>
+      <div class="sm-card" style="background:#e8f0ff" onclick="showSmDetail('facebook')"><div class="sm-icon">👤</div><div class="sm-name" style="color:#1877f2">Facebook</div><div class="sm-age">Age: 13+</div></div>
+      <div class="sm-card" style="background:#fff0f8" onclick="showSmDetail('tiktok')"><div class="sm-icon">🎵</div><div class="sm-name" style="color:#010101">TikTok</div><div class="sm-age">Age: 13+</div></div>
+      <div class="sm-card" style="background:#fff8f0" onclick="showSmDetail('instagram')"><div class="sm-icon">📷</div><div class="sm-name" style="color:#e1306c">Instagram</div><div class="sm-age">Age: 13+</div></div>
+    </div>
+    <div id="sm-detail" style="display:none;background:#fff3e0;border-radius:10px;padding:12px 16px;border-left:4px solid #f7971e;font-size:13px;color:#555;line-height:1.6;margin-top:4px"></div>
+  </div>
+
+  <div class="card">
+    <h3>🔐 Cyber Security ဆိုတာ ဘာလဲ?</h3>
+    <p class="text-body">အင်တာနက်သုံးတဲ့အခါ ကိုယ့်ရဲ့ အချက်အလက်တွေ ခိုးယူမခံရအောင်နဲ့ အန္တရာယ်မဖြစ်အောင် ကာကွယ်တာကို ခေါ်ပါတယ်။</p>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px">
+      <div style="flex:1;min-width:180px;background:#fff3e0;border-radius:12px;padding:14px;border-left:4px solid #f7971e"><div style="font-size:24px;margin-bottom:6px">🏠</div><div style="font-weight:800;color:#c87800;margin-bottom:4px">Real Life မှာ</div><div style="font-size:12px;color:#555;line-height:1.6">အိမ်တံခါးကို သော့ခတ်ထားတယ်<br>မသိသူကို အိမ်မဝင်ခွင့်ပြုဘူး</div></div>
+      <div style="flex:0;display:flex;align-items:center;font-size:24px;color:#aaa">→</div>
+      <div style="flex:1;min-width:180px;background:#fde8e8;border-radius:12px;padding:14px;border-left:4px solid #e94560"><div style="font-size:24px;margin-bottom:6px">💻</div><div style="font-weight:800;color:#c0392b;margin-bottom:4px">Online မှာ</div><div style="font-size:12px;color:#555;line-height:1.6">Password ကို ခိုင်မာအောင် ထားတယ်<br>မသိတဲ့ Links မနှိပ်ဘူး</div></div>
+    </div>
+    <div class="fun-fact" style="background:#fff0f8;border-left:4px solid #e94560;margin-top:12px">
+      <div class="fun-fact-icon">⚠️</div>
+      <div class="fun-fact-text" style="color:#c0392b"><strong>Scary Fact!</strong> ကမ္ဘာပေါ်မှာ တစ်နေ့ကို Cyber Attack ပေါင်း <strong>2,200 ကြိမ်</strong> ကျော် ဖြစ်ပေါ်နေပြီး ပျမ်းမျှ <strong>39 seconds</strong> တစ်ကြိမ် ဖြစ်နေပါတယ်! 🔴</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>🛡 Safety Rules ၅ ခု — Click/Tap လုပ်ပြီး ဖတ်ပါ!</h3>
+    <div class="rule-card" onclick="toggleRule(this)">
+      <div class="rule-icon">🔑</div>
+      <div style="flex:1">
+        <div class="rule-badge">Rule 1</div>
+        <div class="rule-title">Password ကို လျှို့ဝှက်ပါ</div>
+        <div class="rule-short">Password ကို အဖေ/အမေကလွဲလို့ မည်သူ့ကိုမျှ မပေးပါနဲ့!</div>
+        <div class="rule-detail">
+          <strong>ကောင်းသော Password ဥပမာ:</strong><br>
+          ❌ <span style="font-family:monospace;color:#c0392b">123456 · password · abcdef</span><br>
+          ✅ <span style="font-family:monospace;color:#1a8a4e">MyD0g!sC@te2024 · $unR!se#99</span><br><br>
+          <strong>Password ကောင်းရမည့် အချက်:</strong><br>
+          • စာလုံး ကြီး+သေး ရောပါ &nbsp;• ဂဏန်း ထည့်ပါ (0-9)<br>
+          • Special character ထည့်ပါ (!@#$) &nbsp;• အနည်းဆုံး ၈ လုံး<br><br>
+          <div style="background:#f8faff;border-radius:8px;padding:10px;margin-top:8px">
+            <div style="font-size:12px;font-weight:700;color:#333;margin-bottom:6px">🧪 Password Strength Tester:</div>
+            <input type="password" id="pw-test" placeholder="Password ရိုက်ကြည့်..." oninput="testPw(this.value)" style="width:100%;border:1.5px solid #ddd;border-radius:6px;padding:6px 10px;font-size:13px;font-family:monospace;outline:none">
+            <div class="pw-bar-bg"><div class="pw-bar-fill" id="pw-bar" style="width:0%;background:#e74c3c"></div></div>
+            <div class="pw-tip" id="pw-tip">Password ရိုက်ပါ</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="rule-card" onclick="toggleRule(this)">
+      <div class="rule-icon">🤐</div>
+      <div style="flex:1">
+        <div class="rule-badge">Rule 2</div>
+        <div class="rule-title">ကိုယ်ရေးကိုယ်တာ ထိန်းသိမ်းပါ</div>
+        <div class="rule-short">ဖုန်းနံပါတ်၊ အိမ်လိပ်စာ၊ ကျောင်းနာမည် တွေကို Online မှာ မတင်ပါနဲ့!</div>
+        <div class="rule-detail">
+          <strong>Online မှာ မတင်ရသော အချက်အလက်များ:</strong><br>
+          ❌ ဖုန်းနံပါတ် &nbsp; ❌ အိမ်လိပ်စာ &nbsp; ❌ ကျောင်းနာမည်<br>
+          ❌ မိဘနာမည် &nbsp; ❌ Location (လက်ရှိနေရာ)<br><br>
+          မသိသောသူတွေက ဒီအချက်အလက်တွေကို အသုံးပြုပြီး မင်းကို ခြိမ်းခြောက်သောနည်းဖြင့် ချဉ်းကပ်နိုင်ပါတယ်!
+        </div>
+      </div>
+    </div>
+    <div class="rule-card" onclick="toggleRule(this)">
+      <div class="rule-icon">🚫</div>
+      <div style="flex:1">
+        <div class="rule-badge">Rule 3</div>
+        <div class="rule-title">သူစိမ်းဆိုရင် သတိထားပါ</div>
+        <div class="rule-short">မသိတဲ့သူ Link ပို့ရင် မနှိပ်ပါနဲ့! Online မှာ မသိသောသူနဲ့ မပြောပါနဲ့!</div>
+        <div class="rule-detail">
+          🔴 မသိတဲ့သူ Message ပို့ရင် — ပြန်မပြောပဲ ပိတ်ပစ်ပါ<br>
+          🔴 "ဆုကြီးဆွဲမိပြီ!" ဆိုတဲ့ Link တွေ — Scam ပါ မနှိပ်ပါနဲ့<br>
+          🔴 "Free Gift" "Click here" တွေ — Virus/Malware ဖြစ်နိုင်<br>
+          🔴 ဓာတ်ပုံပေးဖို့ တောင်းတဲ့ မသိတဲ့သူ — ချက်ချင်း ပိတ်ပစ်ပါ
+        </div>
+      </div>
+    </div>
+    <div class="rule-card" onclick="toggleRule(this)">
+      <div class="rule-icon">💬</div>
+      <div style="flex:1">
+        <div class="rule-badge">Rule 4</div>
+        <div class="rule-title">ယဉ်ကျေးစွာ ပြောဆိုပါ (Netiquette)</div>
+        <div class="rule-short">Online မှာလည်း Real Life မှာလိုပဲ ယဉ်ယဉ်ကျေးကျေး ဆက်ဆံသင့်ပါတယ်!</div>
+        <div class="rule-detail">
+          ✅ Please, Thank You, Sorry သုံးပါ<br>
+          ✅ တခြားသူ ဓာတ်ပုံကို ခွင့်မပါဘဲ မတင်ပါနဲ့<br>
+          ❌ Cyberbullying (Online Bully လုပ်တာ) မလုပ်ပါနဲ့<br>
+          ❌ Hate speech, ဆဲရေးတာ မလုပ်ပါနဲ့
+        </div>
+      </div>
+    </div>
+    <div class="rule-card" onclick="toggleRule(this)">
+      <div class="rule-icon">👨‍👩‍👧</div>
+      <div style="flex:1">
+        <div class="rule-badge">Rule 5</div>
+        <div class="rule-title">လူကြီးကို အသိပေးပါ</div>
+        <div class="rule-short">တစ်ခုခု ကြောက်လန့်တာ၊ ထူးဆန်းတာ ကြုံရရင် ချက်ချင်း အဖေ/အမေ/ဆရာမကို ပြောပါ!</div>
+        <div class="rule-detail">
+          🚨 မသိသောသူက ကိုယ်ရေးကိုယ်တာ မေးတာ<br>
+          🚨 တစ်ဦးတစ်ယောက်က Online မှာ Bully လုပ်တာ<br>
+          🚨 ကြောက်စရာ ကောင်းတဲ့ Message တွေ ရတာ<br>
+          🚨 ကိုယ့် Account ကို တခြားသူ ဝင်နေတာ သံသယဖြစ်ရင်<br><br>
+          <div style="background:#e8faf0;border-radius:8px;padding:8px 12px;font-size:12px;color:#1a8a4e;font-weight:700">✅ လူကြီးများကို ပြောပြတာဟာ အားနည်းတာ မဟုတ်ဘူး — ဆင်ခြင်တုံတရားရှိတာပါပဲ!</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>🎭 Real Scenario Practice — ဘာလုပ်မလဲ?</h3>
+    <div class="scenario-card">
+      <div style="background:#ff6b6b;color:#fff;font-size:10px;font-weight:800;padding:3px 10px;border-radius:12px;display:inline-block;margin-bottom:8px">SCENARIO 1</div>
+      <div class="scenario-q">😱 မသိတဲ့သူ တစ်ယောက်က Facebook မှာ "မင်း ဆုကြီးဆွဲပြီ! ဒီ Link နှိပ်ပြီး ဆုရယူပါ!" လို့ Message ပို့လာတယ်။ မင်း ဘာလုပ်မလဲ?</div>
+      <div class="scenario-opts">
+        <button class="scenario-opt" onclick="scenAns(this,false,'sr1','🔴 မလုပ်ပါနဲ့! ဒါဟာ Scam ပါ! Link နှိပ်ရင် Virus ဝင်နိုင်ပြီး ကိုယ်ရေးအချက်အလက် ခိုးနိုင်ပါတယ်!')">A. Link နှိပ်ပြီး ဆုရယူမည်</button>
+        <button class="scenario-opt" onclick="scenAns(this,true,'sr1','✅ မှန်ကန်ပါသည်! မသိတဲ့သူ Link တွေ ဘယ်တော့မှ မနှိပ်ပါနဲ့! Report+Block လုပ်ပြီး အဖေ/အမေကို ပြောပါ!')">B. Report+Block လုပ်ပြီး မနှိပ်ဘဲ ထားမည်</button>
+        <button class="scenario-opt" onclick="scenAns(this,false,'sr1','🔴 မလုပ်ပါနဲ့! သူငယ်ချင်းကို Share လုပ်ရင် သူလည်း Scam ကောင်းစားမိနိုင်ပါတယ်!')">C. သူငယ်ချင်းတွေကိုပါ Share လုပ်မည်</button>
+      </div>
+      <div class="scenario-result" id="sr1"></div>
+    </div>
+    <div class="scenario-card">
+      <div style="background:#f7971e;color:#fff;font-size:10px;font-weight:800;padding:3px 10px;border-radius:12px;display:inline-block;margin-bottom:8px">SCENARIO 2</div>
+      <div class="scenario-q">🤔 သူငယ်ချင်းက "Password မေ့သွားတယ် — မင်းရဲ့ Password ကို Backup ထားဖို့ ပြောပါ" လို့ မေးလာတယ်။ ဘာလုပ်မလဲ?</div>
+      <div class="scenario-opts">
+        <button class="scenario-opt" onclick="scenAns(this,false,'sr2','🔴 မလုပ်ပါနဲ့! ဒါဟာ Social Engineering ခေါ်တဲ့ လှည့်ဖျားနည်းပါ! Password ကို မည်သူ့ကိုမျှ မပေးပါနဲ့!')">A. သူငယ်ချင်းကိုး — Password ပေးမည်</button>
+        <button class="scenario-opt" onclick="scenAns(this,true,'sr2','✅ ကောင်းမွန်ပါသည်! Password ကို မည်သူ့ကိုမျှ မပေးရပါ — သူငယ်ချင်းပင်ဆိုစေ!')">B. "Password ကို မည်သူ့မှ မပေးရ" ဆိုပြီး ငြင်းမည်</button>
+        <button class="scenario-opt" onclick="scenAns(this,false,'sr2','🔴 Hint ပေးတာလည်း မလုပ်ပါနဲ့! Hint ကြောင့် Password ကို ခန့်မှန်းနိုင်ပါတယ်!')">C. Password မပေးဘဲ Hint လေး ပေးမည်</button>
+      </div>
+      <div class="scenario-result" id="sr2"></div>
+    </div>
+    <div class="scenario-card">
+      <div style="background:#667eea;color:#fff;font-size:10px;font-weight:800;padding:3px 10px;border-radius:12px;display:inline-block;margin-bottom:8px">SCENARIO 3</div>
+      <div class="scenario-q">📍 TikTok Video တင်ရာမှာ Caption မှာ "[ကျောင်းနာမည်] မှာ ပြန်ရောက်ပြီ!" လို့ tag လုပ်ချင်တယ်။ ဘာလုပ်မလဲ?</div>
+      <div class="scenario-opts">
+        <button class="scenario-opt" onclick="scenAns(this,false,'sr3','🔴 မလုပ်ပါနဲ့! ကျောင်းနာမည်ကို Online မှာ တင်ရင် မသိတဲ့သူတွေ မင်းနေတဲ့နေရာ သိသွားနိုင်ပါတယ်!')">A. ကျောင်းနာမည် Tag လုပ်ပြီး Public ထားမည်</button>
+        <button class="scenario-opt" onclick="scenAns(this,true,'sr3','✅ မှန်ကန်ပါသည်! ကျောင်းနာမည်၊ Location တွေကို Public မတင်ပါနဲ့! Friends Only ထားပါ!')">B. ကျောင်းနာမည် မပါဘဲ Friends Only တင်မည်</button>
+        <button class="scenario-opt" onclick="scenAns(this,false,'sr3','🔴 Caption မှာ ကျောင်းနာမည် ပါနေသရွေ့ Location သိနိုင်ပါတယ်! Caption ကိုပါ စစ်ဆေးပါ!')">C. Location Tag မထည့်ဘဲ Caption ကို Public တင်မည်</button>
+      </div>
+      <div class="scenario-result" id="sr3"></div>
+    </div>
+  </div>
+
+  <div style="background:linear-gradient(135deg,#232526,#414345);border-radius:16px;padding:24px;text-align:center;margin-top:8px">
+    <div style="font-size:36px;margin-bottom:8px">🛡️</div>
+    <div style="font-family:'Fredoka One',cursive;font-size:22px;color:#fff;margin-bottom:10px">Online ကမ္ဘာရဲ့ ရဲကောင်းလေးများ!</div>
+    <div style="color:rgba(255,255,255,.85);font-size:13px;line-height:1.8;margin-bottom:16px">Safety Rules တွေကို လိုက်နာရင် ဘေးကင်းပျော်ရွှင်တဲ့ <strong style="color:#ffd200">နည်းပညာ ရဲကောင်းလေးတွေ</strong> ဖြစ်လာမှာပါ!</div>
+    <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
+      <div style="background:rgba(255,255,255,.15);color:#fff;border-radius:8px;padding:6px 14px;font-size:12px;font-weight:700">🔑 Strong Password</div>
+      <div style="background:rgba(255,255,255,.15);color:#fff;border-radius:8px;padding:6px 14px;font-size:12px;font-weight:700">🤐 Privacy ထိန်း</div>
+      <div style="background:rgba(255,255,255,.15);color:#fff;border-radius:8px;padding:6px 14px;font-size:12px;font-weight:700">🚫 Links မနှိပ်</div>
+      <div style="background:rgba(255,255,255,.15);color:#fff;border-radius:8px;padding:6px 14px;font-size:12px;font-weight:700">💬 Netiquette</div>
+      <div style="background:rgba(255,255,255,.15);color:#fff;border-radius:8px;padding:6px 14px;font-size:12px;font-weight:700">👨‍👩‍👧 လူကြီးကိုပြောပြ</div>
+    </div>
+  </div>
+</div>
+
+<!-- QUIZ -->
+<div class="chapter chq" id="ch7">
+  <div class="chapter-header"><h2>🎯 Final Quiz — မင်းရဲ့ အသိပညာ စစ်ဆေးမယ်!</h2><p>မေးခွန်း ၆၀ ထဲမှ Random ၁၀ ခု </p></div>
+  <div id="quiz-area">
+    <div id="quiz-questions"></div>
+    <button class="quiz-submit" id="submit-btn" onclick="submitQuiz()">📊 Score ကြည့်မယ်!</button>
+  </div>
+  <div id="score-panel" style="display:none">
+    <div class="score-panel">
+      <div class="score-emoji" id="score-emoji">🏆</div>
+      <div class="score-title" id="score-title"></div>
+      <div style="color:rgba(255,255,255,.9);font-size:16px;margin-bottom:4px">မင်းရဲ့ Score</div>
+      <div class="score-num"><span id="score-got">0</span> / 10</div>
+      <div class="score-sub" id="score-msg"></div>
+      <div class="score-bars" id="score-bars-list"></div>
+      <button class="retry-btn" onclick="retryQuiz()">🔄 မေးခွန်းအသစ်နဲ့ ထပ်ကြိုးစားမယ်!</button>
+    </div>
+    <div class="card">
+      <h3>📖 မင်းရဲ့ Answers ပြန်ကြည့်မယ်</h3>
+      <div id="review-list" style="font-size:13px;line-height:2"></div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /book-container -->
+
+<script>
+/* ── HW DETAIL ── */
+var hwDetails = {
+  keyboard:'⌨️ <strong>Keyboard </strong><br>သင်ရိုက်တဲ့ Key တိုင်းဟာ electrical signal အဖြစ် CPU ဆီ ရောက်ပါတယ်။ QWERTY layout ဟာ 1868 မှာ Typewriter ခေတ်မှ ဆင်းသက်လာပြီး ကမ္ဘာ Standard ဖြစ်နေဆဲပါ! Key အရေအတွက် 104 ခု ရှိပါတယ်!',
+  mouse:'🖱 <strong>Mouse </strong><br>Mouse ကို Douglas Engelbart က 1964 မှာ Wood နဲ့ တီထွင်ခဲ့တယ်! ယနေ့ Optical Mouse တွေကတော့ LED Light နဲ့ Sensor ကို သုံးပြီး တစ်စက္ကန့် 1000+ ကြိမ် ဖတ်ကာ Cursor ကို ရွှေ့ပါတယ်!',
+  mic:'🎤 <strong>Microphone </strong><br>မင်းရဲ့ အသံ (Sound Waves) ကို Diaphragm ဆိုတဲ့ thin membrane က vibrate ဖြစ်ကာ Electrical Signal အဖြစ် ပြောင်းပြီး Digital Data ဖြစ်သွားတယ်! Zoom call, Recording အားလုံး ဒီပုံစံပဲ!',
+  webcam:'📸 <strong>Webcam</strong><br>Webcam မှာ Image Sensor (CMOS chip) ရှိပြီး တစ်စက္ကန့်မှာ 30-60 Frame ရိုက်ကူးပြီး Digital Video Data အဖြစ် ပြောင်းကာ Internet ကနေ ပို့ပေးပါတယ်!'
+};
+function showHwDetail(k){var d=document.getElementById('hw-detail');d.style.display='block';d.innerHTML=hwDetails[k]||'';}
+
+/* ── DESKTOP CLICK ── */
+var deskDetails = {
+  thispc:'🖥 <strong>This PC</strong> — မင်းရဲ့ ကွန်ပျူတာ Drives (C:, D:), Connected Devices တွေကို ကြည့်ရတဲ့နေရာ!',
+  recycle:'🗑 <strong>Recycle Bin</strong> — Delete လုပ်ထားသော Files ခဏ မှတ်ထားပေးပါတယ်! Empty ဆိုမှ ပြီးပြတ် ပျောက်မှာ!',
+  chrome:'🌐 <strong>Google Chrome</strong> — Google ရဲ့ Web Browser ပါ! URL Bar ထဲ website address ရိုက်ဝင်ရင် ဘယ် website မဆို ဝင်ကြည့်နိုင်ပါတယ်!',
+  docs:'📁 <strong>My Documents</strong> — Personal Files တွေ သိမ်းဆည်းရမည့် Default Folder ပါ! Folder တွေ ခွဲဆောက်ပြီး Organize လုပ်ပါ!',
+  settings:'⚙️ <strong>Settings</strong> — ကွန်ပျူတာ Appearance, Wifi, Bluetooth, Updates အားလုံး ဒီနေရာမှာ ချိန်ညှိနိုင်ပါတယ်! Windows Key + I နှိပ်ရင် တိုက်ရိုက် ဖွင့်နိုင်!',
+  start:'⊞ <strong>Start Menu</strong> — Install ထားတဲ့ Apps အားလုံး ဒီနေရာမှာ ရှာနိုင်ပါတယ်!'
+};
+function deskClick(k){var d=document.getElementById('desk-popup');d.style.display='block';d.innerHTML=deskDetails[k]||'';}
+
+/* ── HISTORY TOGGLE ── */
+function toggleHistory(btn){
+  var body=btn.nextElementSibling;var isOpen=body.classList.contains('open');
+  document.querySelectorAll('.history-body.open').forEach(function(b){b.classList.remove('open');});
+  document.querySelectorAll('.history-trigger.open').forEach(function(b){b.classList.remove('open');});
+  if(!isOpen){body.classList.add('open');btn.classList.add('open');}
+}
+
+/* ── HOW TOGGLE ── */
+function toggleHow(id){var el=document.getElementById(id);if(el)el.classList.toggle('open');}
+
+/* ── CHAPTER NAV ── */
+function showChap(n){
+  for(var i=1;i<=5;i++){document.getElementById('ch'+i).classList.remove('visible');document.getElementById('nav'+i).classList.remove('active');}
+  document.getElementById('ch6').classList.remove('visible');document.getElementById('nav6').classList.remove('active');
+  document.getElementById('ch7').classList.remove('visible');document.getElementById('nav7').classList.remove('active');
+  if(n<=6){document.getElementById('ch'+n).classList.add('visible');document.getElementById('nav'+n).classList.add('active');}
+  else{document.getElementById('ch7').classList.add('visible');document.getElementById('nav7').classList.add('active');buildQuiz();}
+  document.getElementById('progress').style.width=(n/7*100)+'%';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ── SHORTCUTS ── */
+var shortcuts=[
+  {key:'Ctrl+C',desc:'Copy',icon:'📋',title:'Copy — ကူးယူသည်',info:'ရွေးထားသော Text/File ကို Clipboard ထဲ ထည့်တယ်။ မူလ File မပြောင်းဘဲ ရှိနေပါတယ်!',anim:'[Selected] → Ctrl+C → Clipboard ✓'},
+  {key:'Ctrl+V',desc:'Paste',icon:'📌',title:'Paste — ကပ်သည်',info:'Clipboard ထဲမှ ကူးထားသော အရာကို လိုချင်သောနေရာမှာ ထည့်တယ်!',anim:'Clipboard → Ctrl+V → [Pasted Here] ✓'},
+  {key:'Ctrl+S',desc:'Save ✅',icon:'💾',title:'Save — သိမ်းသည်',info:'လက်ရှိ Document ကို Disk ထဲ သိမ်းတယ်! ၂-၃ မိနစ်တိုင်း နှိပ်ပေးပါ!',anim:'Document → Ctrl+S → 💾 Saved! ✓'},
+  {key:'Ctrl+Z',desc:'Undo',icon:'↩️',title:'Undo — နောက်ဆုတ်သည်',info:'ပြီးခဲ့သော Action ကို ပြန်ဖျက်တယ်!',anim:'မှားသောAction → Ctrl+Z → Reverted! ✓'},
+  {key:'Win+E',desc:'File Explorer',icon:'📁',title:'File Explorer ဖွင့်သည်',info:'Windows Explorer ကို တိုက်ရိုက် ဖွင့်တယ်!',anim:'Win+E → 📁 File Explorer Opened! ✓'},
+  {key:'Ctrl+A',desc:'Select All',icon:'🔲',title:'Select All — အကုန်ရွေးသည်',info:'Items အကုန်လုံးကို တစ်ချက်နဲ့ Select လုပ်တယ်!',anim:'Ctrl+A → [Everything Selected] ✓'},
+  {key:'Ctrl+X',desc:'Cut',icon:'✂️',title:'Cut — ဖြတ်ပြောင်းသည်',info:'ရွေးထားသော Text/File ကို ဖြတ်ယူပြီး Clipboard ထဲ ထည့်တယ်! မူလနေရာမှ ပျောက်သွားပါတယ်!',anim:'[Selected] → Ctrl+X → Removed + Clipboard ✓'},
+  {key:'Ctrl+P',desc:'Print',icon:'🖨️',title:'Print — ထုတ်သည်',info:'Print Dialog ကို ဖွင့်ပြီး Printer ရွေးပြီး Document ထုတ်နိုင်တယ်!',anim:'Ctrl+P → 🖨️ Print Dialog Opened ✓'},
+  {key:'Ctrl+F',desc:'Find',icon:'🔍',title:'Find — ရှာဖွေသည်',info:'Document/Browser ထဲမှ Keyword ကို ရှာတယ်!',anim:'Ctrl+F → Search Box → Type keyword... ✓'},
+  {key:'Ctrl+Y',desc:'Redo',icon:'↪️',title:'Redo — ပြန်လုပ်သည်',info:'Undo လုပ်ပြီးနောက် ပြန်ယူနိုင်တယ်!',anim:'Ctrl+Z → Ctrl+Y → Restored! ✓'},
+  {key:'Alt+F4',desc:'Close App',icon:'❌',title:'App ပိတ်သည်',info:'လက်ရှိ App/Window ကို ချက်ချင်း ပိတ်တယ်!',anim:'Alt+F4 → [App Closing...] → Closed ✓'},
+  {key:'Win+D',desc:'Show Desktop',icon:'🖥️',title:'Desktop ပြ/ဝှက်သည်',info:'Windows အကုန်လုံးကို တစ်ချက်နဲ့ Minimize/Restore လုပ်တယ်!',anim:'Win+D → All Windows Minimized → Desktop ✓'},
+  {key:'Win+L',desc:'Lock PC',icon:'🔒',title:'PC Lock လုပ်သည်',info:'ကွန်ပျူတာကို Lock လုပ်ပြီး Login Screen ကို ပြတယ်! Screenမှ ထသွားချိန် Privacyဖြစ်ပါသည် မကြာခဏသုံးပါ !',anim:'Win+L → 🔒 Locked → Password required ✓'},
+  {key:'Ctrl+Tab',desc:'Switch Tab',icon:'🔄',title:'Browser Tab ပြောင်းသည်',info:'Browser ထဲမှာ Tab တွေကြား ပြောင်းတယ်!',anim:'Tab1 → Ctrl+Tab → Tab2 → Tab3 ✓'},
+  {key:'PrtSc',desc:'Screenshot',icon:'📸',title:'Screenshot ရိုက်သည်',info:'Screen တစ်ခုလုံးကို ကူးပြီး Clipboard ထဲ ထည့်တယ်!',anim:'PrtSc → 📸 Screen Captured → Clipboard ✓'}
+];
+
+/* ── CH.6 FUNCTIONS ── */
+var smDetails={
+  youtube:'▶️ <strong>YouTube</strong> — Age 13+. မိဘ ကြည့်ရှုမှုနဲ့ ကလေးများ YouTube Kids ကိုသာ သုံးသင့်ပါတယ်! Comment section မှာ မသိသောသူ Message တွေ သတိထားပါ!',
+  facebook:'👤 <strong>Facebook</strong> — Age 15+. Privacy Settings ကို "Friends Only" ထားပါ! Personal Info (ဖုန်း/လိပ်စာ) Profile မှာ မတင်ပါနဲ့!',
+  tiktok:'🎵 <strong>TikTok</strong> — Age 15+. Account ကို Private ထားပြီး Location Feature ကို ပိတ်ထားပါ!',
+  instagram:'📷 <strong>Instagram</strong> — Age 15+. Account ကို Private ထားပြီး မသိသောသူ Follow Request တွေ Accept မလုပ်ပါနဲ့!'
+};
+function showSmDetail(k){var d=document.getElementById('sm-detail');d.style.display='block';d.innerHTML=smDetails[k]||'';}
+
+function toggleRule(el){
+  var isOpen=el.classList.contains('open');
+  document.querySelectorAll('.rule-card.open').forEach(function(c){c.classList.remove('open');});
+  if(!isOpen)el.classList.add('open');
+}
+
+function testPw(val){
+  var score=0;
+  if(val.length>=8)score++;if(val.length>=12)score++;
+  if(/[A-Z]/.test(val))score++;if(/[a-z]/.test(val))score++;
+  if(/[0-9]/.test(val))score++;if(/[^A-Za-z0-9]/.test(val))score++;
+  var pct=Math.round(score/6*100);
+  var color=score<=2?'#e74c3c':score<=4?'#f7971e':'#2ecc71';
+  var label=score<=2?'🔴 Weak — အားနည်းသည်':score<=4?'🟡 Medium — အလတ်စား':'🟢 Strong — ခိုင်မာသည်!';
+  document.getElementById('pw-bar').style.width=pct+'%';
+  document.getElementById('pw-bar').style.background=color;
+  document.getElementById('pw-tip').textContent=val?label:'Password ရိုက်ပါ';
+  document.getElementById('pw-tip').style.color=val?color:'#666';
+}
+
+function scenAns(btn,correct,resultId,msg){
+  var opts=btn.closest('.scenario-opts').querySelectorAll('.scenario-opt');
+  opts.forEach(function(o){o.disabled=true;});
+  btn.classList.add(correct?'safe':'danger');
+  var res=document.getElementById(resultId);
+  res.className='scenario-result '+(correct?'show-safe':'show-danger');
+  res.innerHTML=msg;
+}
+
+/* ── QUIZ ── */
+var ALL_QUESTIONS=[
+  // Ch.1
+  {id:1,topic:'Ch.1',q:'ကွန်ပျူတာ cycle မှာ Input ပြီးနောက် ဘာဆင့် လာသလဲ?',opts:['Output','Process','Storage','Display'],ans:1,exp:'Input → Process → Output! CPU က Process ကို လုပ်ပြီးမှ Output ထွက်ပါတယ်။'},
+  {id:2,topic:'Ch.1',q:'ကွန်ပျူတာ ဆိုတာ ဘာကို ဆိုလိုသလဲ?',opts:['ဂိမ်းဆော့သော ကိရိယာ','Data တွေကို မြန်ဆန်စွာ တွက်ချက်ပေးသော Electronic Device','ရုပ်ရှင်ကြည့်သော ကိရိယာ','သီချင်းနားထောင်သော ကိရိယာ'],ans:1,exp:'ကွန်ပျူတာဟာ Data တွေကို မြန်ဆန်စွာ တွက်ချက်၊ သိမ်းဆည်း၊ ပြသပေးနိုင်သော Electronic Device ပါ!'},
+  {id:3,topic:'Ch.1',q:'ENIAC ကို မည်သည့်နှစ်တွင် တည်ဆောက်ခဲ့သနည်း?',opts:['1822','1936','1945','1984'],ans:2,exp:'ENIAC ကို 1945 မှာ Pennsylvania University မှာ တည်ဆောက်ခဲ့ပါတယ်!'},
+  {id:4,topic:'Ch.1',q:'World Wide Web ကို ဘယ်သူ တီထွင်ခဲ့သလဲ?',opts:['Steve Jobs','Bill Gates','Tim Berners-Lee','Elon Musk'],ans:2,exp:'Tim Berners-Lee က 1991 မှာ HTML, URL, HTTP တီထွင်ပြီး WWW ဖန်တီးခဲ့ပါတယ်!'},
+  {id:5,topic:'Ch.1',q:'iPhone ကို ဘယ်နှစ်မှာ ထွက်ရှိခဲ့သနည်း?',opts:['2000','2005','2007','2010'],ans:2,exp:'Steve Jobs က 2007 မှာ iPhone မိတ်ဆက်ပြီး Smartphone ခေတ် စတင်ခဲ့ပါတယ်!'},
+  {id:6,topic:'Ch.1',q:'CPU တစ်လုံး တစ်စက္ကန့်မှာ ဘယ်နှစ်ကြိမ် တွက်ချက်နိုင်သလဲ?',opts:['တစ်သောင်းကြိမ်','တစ်သန်းကြိမ်','Billion ကြိမ်ကျော်','တစ်ကြိမ်သာ'],ans:2,exp:'Modern CPU (3GHz) ဟာ တစ်စက္ကန့်မှာ 3,000,000,000 ကြိမ် ကျော် တွက်ချက်နိုင်ပါတယ်!'},
+  {id:7,topic:'Ch.1',q:'Desktop နဲ့ Laptop ဘာကွာသလဲ?',opts:['Desktop က ပိုမြန်','Laptop က သယ်ယူနိုင်ပြီး Desktop က တစ်နေရာထားသုံး','Desktop က ပိုပေါ့','ကွာခြားချက် မရှိ'],ans:1,exp:'Laptop ဟာ Battery ပါပြီး Portable ဖြစ်ပါတယ်!'},
+  {id:8,topic:'Ch.1',q:'Server ဆိုတာ ဘာကိုဆိုလိုသနည်း?',opts:['အိတ်ဆောင် Device တစ်ခု','Internet Data တွေ သိမ်းပေးသော ကြီးမားသော Computer','Laptop တစ်မျိုး','Software တစ်ခု'],ans:1,exp:'Server ဟာ Website/App Data တွေကို 24/7 သိမ်းဆည်းပြီး User တွေဆီ ပေးပို့နေတဲ့ Computer ပါ!'},
+  {id:9,topic:'Ch.1',q:"Babbage's Difference Engine ကို ဘာနဲ့ ဖန်တီးခဲ့သနည်း?",opts:['Transistors','Vacuum Tubes','Mechanical Gears','Silicon Chips'],ans:2,exp:'Babbage က 1822 မှာ Mechanical Gears သုံးပြီး ပထမဆုံး Mechanical Computer တည်ဆောက်ခဲ့ပါတယ်!'},
+  {id:10,topic:'Ch.1',q:'Output ဆိုတာ ဘာကိုဆိုလိုသနည်း?',opts:['ကွန်ပျူတာကို ပေးသောအချက်','ကွန်ပျူတာမှ ထွက်ပေးသောရလဒ်','Data သိမ်းသောနည်း','CPU အလုပ်လုပ်ပုံ'],ans:1,exp:'Output ဆိုတာ ကွန်ပျူတာ Process ပြီးတဲ့ ရလဒ် — Screen ပြတာ၊ Print ထုတ်တာ တို့ ဖြစ်ပါတယ်!'},
+  // Ch.2
+  {id:11,topic:'Ch.2',q:'CPU ဆိုသည်မှာ ဘာ abbreviation ၏ အတိုကောက်?',opts:['Computer Processing Unit','Central Processing Unit','Core Power Unit','Circuit Programming Unit'],ans:1,exp:'CPU = Central Processing Unit ပါ!'},
+  {id:12,topic:'Ch.2',q:'SSD နဲ့ HDD မှာ ဘယ်ဟာ ပိုမြန်သလဲ?',opts:['SSD — Flash Memory ဖြင့် Data သိမ်း','HDD — Disk ကြီး','နှစ်ခုလုံး တူညီ','HDD — Magnetic'],ans:0,exp:'SSD မှာ Flash Memory Chip သုံးထားတာကြောင့် HDD ထက် ၁၀ ဆ ကျော် မြန်ပါတယ်!'},
+  {id:13,topic:'Ch.2',q:'Input Device မဟုတ်တဲ့ ဟာ ဘယ်ဟာလဲ?',opts:['Keyboard','Mouse','Monitor (Display)','Microphone'],ans:2,exp:'Monitor ဟာ Output Device ပါ!'},
+  {id:14,topic:'Ch.2',q:'CPU ကို ကွန်ပျူတာရဲ့ ဘာနဲ့ တူသည်ဟု ဆိုသလဲ?',opts:['နှလုံး','ဦးနှောက်','မျက်စိ','လက်'],ans:1,exp:'CPU ကို ကွန်ပျူတာရဲ့ ဦးနှောက်လို့ ခေါ်ပါတယ်!'},
+  {id:15,topic:'Ch.2',q:'RAM ဆိုတာ ဘာကို ဆိုလိုသနည်း?',opts:['Random Access Memory','Real Application Memory','Rapid Action Module','Remote Access Manager'],ans:0,exp:'RAM = Random Access Memory — ကွန်ပျူတာ Run နေစဉ် Data ကို ခဏသိမ်းထားသော Memory ပါ!'},
+  {id:16,topic:'Ch.2',q:'Printer ဆိုတာ ဘာ Device?',opts:['Input Device','Output Device','Storage Device','Processing Device'],ans:1,exp:'Printer ဟာ Output Device ပါ!'},
+  {id:17,topic:'Ch.2',q:'QWERTY keyboard ကို ဘယ်သူ ဘယ်နှစ်မှာ တီထွင်ခဲ့သနည်း?',opts:['Bill Gates — 1980','Christopher Sholes — 1868','Steve Jobs — 1984','Tim Berners-Lee — 1991'],ans:1,exp:'Christopher Sholes က 1868 မှာ QWERTY layout တီထွင်ခဲ့ပါတယ်!'},
+  {id:18,topic:'Ch.2',q:'HDD မှာ Data ဘယ်လို သိမ်းသလဲ?',opts:['Flash chips ထဲ','Spinning magnetic disk ပေါ်','Cloud ထဲ','RAM ထဲ'],ans:1,exp:'HDD ဟာ Magnetic Spinning disk ပေါ်မှာ Read/Write head ဖြင့် Data ဖတ်/ရေးပါတယ်!'},
+  {id:19,topic:'Ch.2',q:'Webcam ဘာအတွက် သုံးသလဲ?',opts:['အသံ ထည့်ဖို့','Video/Photo ရိုက်ဖို့ — Video Call ဖို့','Data သိမ်းဖို့','Internet ချိတ်ဆက်ဖို့'],ans:1,exp:'Webcam မှာ Image Sensor ရှိပြီး Video Call, Recording အတွက် Data ထုတ်ပေးပါတယ်!'},
+  {id:20,topic:'Ch.2',q:'ENIAC မှာ Vacuum Tubes ဘယ်နှစ်လုံး ပါသလဲ?',opts:['1,000','5,000','18,000','100,000'],ans:2,exp:'ENIAC မှာ Vacuum Tubes 18,000 ပါပါတယ်!'},
+  // Ch.3
+  {id:21,topic:'Ch.3',q:'Windows, macOS, Ubuntu — ဒါတွေ ဘယ် category Software?',opts:['Application Software','System Software (OS)','Game Software','Creative Software'],ans:1,exp:'Windows, macOS, Ubuntu တွေဟာ System Software (OS) တွေပါ!'},
+  {id:22,topic:'Ch.3',q:'Application Software ဆိုတာ ဘာကိုဆိုလိုသနည်း?',opts:['ကွန်ပျူတာ ဖွင့်တာနဲ့ Run တဲ့ Software','User တွေ တကယ်သုံးသော Apps','Hardware ထိန်းချုပ်သော Software','Internet ချိတ်ဆက်သော Software'],ans:1,exp:'Chrome, Photoshop, Minecraft ကဲ့သို့ User တွေ တကယ်သုံးတဲ့ Programs တွေပါ!'},
+  {id:23,topic:'Ch.3',q:'Software မရှိရင် Hardware ဘာဖြစ်မည်?',opts:['ပိုကောင်း','သံတိုသံစ — အလုပ်မလုပ်နိုင်','မပြောင်းလဲ','ပိုမြန်'],ans:1,exp:'Hardware = body, Software = soul! Software မရှိရင် ဘာမှ ပြပေးနိုင်မည် မဟုတ်!'},
+  {id:24,topic:'Ch.3',q:'Web Browser ဆိုတာ ဘာ Software?',opts:['System Software','Application Software','Firmware','Driver'],ans:1,exp:'Chrome, Edge, Firefox တို့ဟာ Application Software ပါ!'},
+  {id:25,topic:'Ch.3',q:'ကွန်ပျူတာ ဖွင့်တာနဲ့ ပထမဆုံး Run တဲ့ Software ဘာလဲ?',opts:['Chrome','Photoshop','System Software / OS','Microsoft Word'],ans:2,exp:'BIOS/UEFI ပြေးပြီး System Software (OS) ကို load လုပ်ပါတယ်!'},
+  {id:26,topic:'Ch.3',q:'Photoshop ကို ဘာအတွက် သုံးသလဲ?',opts:['Word Documents ရေးဖို့','ဓာတ်ပုံ Edit/Design ဖန်တီးဖို့','Internet ကြည့်ဖို့','Video Call ဖို့'],ans:1,exp:'Adobe Photoshop ဟာ Professional Image Editing Software ပါ!'},
+  {id:27,topic:'Ch.3',q:'Software ကို မျက်စိနဲ့ တိုက်ရိုက် မြင်နိုင်သလား?',opts:['ဟုတ်တယ်','မမြင်ရ — ရလဒ်ကို မြင်ရ','Disk ထဲ မြင်ရ','Keyboard မှာ မြင်ရ'],ans:1,exp:'Software ကိုယ်တိုင် Invisible ဖြစ်ပြီး ရလဒ်ကိုသာ Screen ပေါ်မှာ မြင်ရပါတယ်!'},
+  {id:28,topic:'Ch.3',q:'Discord, Telegram တို့ ဘာ Software category?',opts:['System Software','Application Software (Communication)','Game Software','Database Software'],ans:1,exp:'Discord, Telegram တို့ဟာ Communication Application Software တွေပါ!'},
+  {id:29,topic:'Ch.3',q:'OS ဆိုတာ ဘာ?',opts:['Games ဆော့ဖို့','Hardware နဲ့ User ချိတ်ဆက်ပေးသော System Software','Documents ရေးဖို့ App','Photo Edit Tool'],ans:1,exp:'OS ဟာ User, Apps, Hardware ကြားမှာ ကြားချက်ဆောင်ပြီး ကွန်ပျူတာ ထိန်းချုပ်ပေးသော Software!'},
+  {id:30,topic:'Ch.3',q:'Minecraft, Roblox တို့ ဘာ Software category?',opts:['System Software','Creative Software','Game Application Software','Web Browser'],ans:2,exp:'Minecraft, Roblox တို့ဟာ Game Application Software တွေပါ!'},
+  // Ch.4
+  {id:31,topic:'Ch.4',q:'Copy ပြီး Paste လုပ်ဖို့ shortcut မှန်သောအတွဲ?',opts:['Ctrl+X → Ctrl+V','Ctrl+C → Ctrl+V','Ctrl+S → Ctrl+P','Ctrl+Z → Ctrl+Y'],ans:1,exp:'Copy = Ctrl+C, Paste = Ctrl+V ပါ!'},
+  {id:32,topic:'Ch.4',q:'Taskbar ဆိုတာ Windows Desktop မှာ ဘယ်နေရာ?',opts:['Screen ဘယ်ဘက်','Screen ညာဘက်','Screen ထိပ်ဆုံး','Screen အောက်ဆုံး'],ans:3,exp:'Taskbar ဟာ Screen ရဲ့ အောက်ဆုံး (bottom) မှာ ရှိပါတယ်!'},
+  {id:33,topic:'Ch.4',q:'Start Menu ကို ဘယ် Key နဲ့ ဖွင့်နိုင်သလဲ?',opts:['Ctrl','Alt','Windows key (⊞)','F1'],ans:2,exp:'Windows Key (⊞) နှိပ်ရင် Start Menu ကို တိုက်ရိုက် ဖွင့်နိုင်ပါတယ်!'},
+  {id:34,topic:'Ch.4',q:'File Explorer ကို ဘာ Shortcut နဲ့ ဖွင့်သလဲ?',opts:['Ctrl+E','Windows+E','Alt+F','Ctrl+F'],ans:1,exp:'Windows+E နှိပ်ရင် File Explorer ကို တိုက်ရိုက် ဖွင့်နိုင်ပါတယ်!'},
+  {id:35,topic:'Ch.4',q:'Recycle Bin ဆိုတာ ဘာ?',opts:['Internet Download Folder','Delete လုပ်ထားသော Files ခဏသိမ်းသောနေရာ','New Files ဖန်တီးသောနေရာ','Virus ကာကွယ်သော Tool'],ans:1,exp:'Recycle Bin ဟာ Delete Files ခဏ မှတ်ထားပေးပါတယ် — Empty ဆိုမှ ပြီးပြတ် ပျောက်မှာ!'},
+  {id:36,topic:'Ch.4',q:'Ctrl+Z ဆိုသည်မှာ ဘာ?',opts:['Save','Copy','Undo — ပြီးခဲ့သော Action ပြန်ဖျက်','Paste'],ans:2,exp:'Ctrl+Z ဟာ Undo ပါ!'},
+  {id:37,topic:'Ch.4',q:'Desktop ဆိုတာ ဘာ?',opts:['ကွန်ပျူတာ ပိတ်ထားသောအချိန်','ကွန်ပျူတာ ဖွင့်တာနဲ့ မြင်ရသော Main Screen','Hard Drive ထဲသော Folder','CPU ထဲမှာ ရှိသော Part'],ans:1,exp:'Desktop ဟာ ကွန်ပျူတာ ဖွင့်တာနဲ့ မြင်ရသော Main Screen ပါ!'},
+  {id:38,topic:'Ch.4',q:'Ctrl+A Shortcut ဘာ Action?',opts:['App ပိတ်','Files/Text အားလုံး Select','Computer ပိတ်','Screenshot ရိုက်'],ans:1,exp:'Ctrl+A ဟာ Select All ပါ!'},
+  {id:39,topic:'Ch.4',q:'Search Box ကို ဘာအတွက် သုံးသလဲ?',opts:['Internet ကြည့်ဖို့','Apps, Files, Settings ရှာဖွေဖို့','Email ပို့ဖို့','Photo ရိုက်ဖို့'],ans:1,exp:'Windows Search Box ထဲ App/File နာမည် ရိုက်ဝင်ရင် တိုက်ရိုက် ဖွင့်နိုင်ပါတယ်!'},
+  {id:40,topic:'Ch.4',q:'Ctrl+S ကို ဘယ်အချိန် နှိပ်ရမည်?',opts:['ကွန်ပျူတာ ဖွင့်တာနဲ့','Document ဖွင့်တာနဲ့','အလုပ်လုပ်နေစဉ် မကြာမကြာ','ပိတ်မတိုင်မီ တစ်ကြိမ်သာ'],ans:2,exp:'Ctrl+S ကို ၂-၃ မိနစ်တိုင်း နှိပ်ပေးပါ!'},
+  // Ch.5
+  {id:41,topic:'Ch.5',q:'ကောင်းသော File နာမည် ဘယ်ဟာ မှန်သလဲ?',opts:['Final_FINAL_v3.docx','untitled.docx','Math_Homework_Ch3_Jan2024.docx','asdfasdf.docx'],ans:2,exp:'Math_Homework_Ch3_Jan2024 ဆိုတာ Subject+Type+Date ပါ — ပြန်ရှာတဲ့အခါ လွယ်ကူပါတယ်!'},
+  {id:42,topic:'Ch.5',q:'Folder နဲ့ File ဘာကွာသလဲ?',opts:['ကွာခြားချက် မရှိ','File က ပိုကြီး','Folder က Files စုထည့်သော Container','Folder ဆိုတာ Desktop Icon သာ'],ans:2,exp:'Folder ဆိုတာ Files တွေကို စုထည့်သော Digital အိတ် ပါ!'},
+  {id:43,topic:'Ch.5',q:'.jpg ဆိုသော extension ဘာ Data?',opts:['Music','Video','Image/Photo','Word Document'],ans:2,exp:'.jpg ဟာ Image/Photo file extension ပါ!'},
+  {id:44,topic:'Ch.5',q:'.mp3 ဆိုသော extension ဘာ Data?',opts:['Image','Audio/Music','Video','Document'],ans:1,exp:'.mp3 ဟာ Audio/Music file extension ပါ!'},
+  {id:45,topic:'Ch.5',q:'Files Organize ကောင်းအောင် ဘာလုပ်သင့်?',opts:['Desktop ပေါ် အကုန် ထားသည်','Subject/Type အလိုက် Folders ခွဲပြီး ထည့်','Files နာမည်မပေးဘဲ ထားသည်','Files Delete လုပ်သည်'],ans:1,exp:'Professional User တိုင်း Folders ဆောက်ပြီး Files ခွဲထည့်ကြပါတယ်!'},
+  {id:46,topic:'Ch.5',q:'.docx ဆိုသော extension ဘာနဲ့ ဖြင့်သလဲ?',opts:['Photoshop','VLC','Microsoft Word','Chrome'],ans:2,exp:'.docx ဟာ Microsoft Word Document extension ပါ!'},
+  {id:47,topic:'Ch.5',q:'Ctrl+C ကြောင့် မူလ File ဘာဖြစ်သနည်း?',opts:['ပျောက်','မပြောင်းလဲ — Copy ထပ်ဖန်တီးနိုင်','Delete ဖြစ်','Rename ဖြစ်'],ans:1,exp:'Ctrl+C (Copy) လုပ်ရင် မူလ File မပြောင်းဘဲ ရှိနေပါတယ်!'},
+  {id:48,topic:'Ch.5',q:'.pdf ဆိုသော extension ဘာ?',opts:['Portable Document Format — ဘယ် Device မဆို မြင်ရ','Photo file','Music file','Game file'],ans:0,exp:'.pdf ဟာ Portable Document Format — Layout မပြောင်းဘဲ မြင်ရသော File format ပါ!'},
+  {id:49,topic:'Ch.5',q:'File Explorer ကို ဘာအတွက် သုံးသလဲ?',opts:['Internet ကြည့်ဖို့','Files/Folders Browse, Move, Copy, Delete ဖို့','Video ကြည့်ဖို့','Email စစ်ဆေးဖို့'],ans:1,exp:'File Explorer (Windows+E) ဟာ Files/Folders Browse, Move, Copy, Delete လုပ်နိုင်သော Built-in Tool ပါ!'},
+  {id:50,topic:'Ch.5',q:'Ctrl+X Shortcut ဘာ Action?',opts:['Copy — မူလ ထားရှိ','Cut — မူလကို ရွှေ့ပြောင်း','Save','Undo'],ans:1,exp:'Ctrl+X ဟာ Cut ပါ — File/Text ကို ရွှေ့ချင်ရင် Cut (Ctrl+X) ပြီး Paste (Ctrl+V) လုပ်ပါ!'},
+  // Ch.6 Cyber Security
+  {id:51,topic:'Ch.6',q:'Cyber Security ဆိုတာ ဘာကိုဆိုလိုသနည်း?',opts:['Internet မျှင် မြန်အောင် လုပ်တာ','Online မှာ ကိုယ်ရေးအချက်အလက် ကာကွယ်တာ','Computer ပြင်ဆင်တာ','Social Media အသုံးပြုနည်း'],ans:1,exp:'Cyber Security ဆိုတာ အင်တာနက်သုံးတဲ့အခါ ကိုယ့်ရဲ့ Data တွေ ခိုးယူမခံရအောင် ကာကွယ်တာပါ!'},
+  {id:52,topic:'Ch.6',q:'ကောင်းသော Password ဥပမာ ဘယ်ဟာ မှန်သလဲ?',opts:['123456','password','MyD0g!sC@te2024','abcdefgh'],ans:2,exp:'ကောင်းသော Password မှာ စာလုံးကြီး+သေး၊ ဂဏန်း၊ Special characters (!@#$) ပါရမည်!'},
+  {id:53,topic:'Ch.6',q:'Social Media Age Limit (Facebook, TikTok, Instagram) ဘယ်နှစ်နှစ်လဲ?',opts:['Age 10+','Age 13+','Age 16+','Age 18+'],ans:1,exp:'Facebook, TikTok, Instagram, YouTube အားလုံး Age 13+ ဖြစ်ပါတယ်!'},
+  {id:54,topic:'Ch.6',q:'မသိသောသူ Link ပို့ရင် ဘာလုပ်သင့်သလဲ?',opts:['Link ကို နှိပ်ပြီး ကြည့်','Link မနှိပ်ဘဲ Report+Block လုပ်ပြီး လူကြီးကို ပြော','သူငယ်ချင်းတွေကို Share','Ignore လုပ်ပြီး Reply'],ans:1,exp:'မသိသောသူ Links တွေ ဘယ်တော့မှ မနှိပ်ပါနဲ့! Report+Block လုပ်ပြီး အဖေ/အမေကို ပြောပါ!'},
+  {id:55,topic:'Ch.6',q:'Netiquette ဆိုတာ ဘာကိုဆိုလိုသနည်း?',opts:['Internet မြန်နှုန်း တိုင်းထွာနည်း','Online မှာ ယဉ်ကျေးစွာ ဆက်ဆံနည်း','Network cable ချိတ်ဆက်နည်း','Password ဖန်တီးနည်း'],ans:1,exp:'Netiquette = Network + Etiquette — Online မှာ ယဉ်ယဉ်ကျေးကျေး ဆက်ဆံတာကို ဆိုလိုပါတယ်!'},
+  {id:56,topic:'Ch.6',q:'Password ကို မည်သူ့နဲ့ Share သင့်သနည်း?',opts:['သူငယ်ချင်းနဲ့','Online မှာ မည်သူ့နဲ့မျှ မ Share ရ','Teacher နဲ့','Class မိတ်ဆွေနဲ့'],ans:1,exp:'Password ကို မည်သူ့ကိုမျှ — မိဘပင်ဆိုစေ — မပေးပါနဲ့! Password ဟာ ကိုယ်တိုင်သာ သိရသော လျှို့ဝှက်ချက်!'},
+  {id:57,topic:'Ch.6',q:'Online မှာ ကိုယ်ရေးကိုယ်တာ မတင်ရသော အချက်အလက်မှာ မပါသောဟာ ဘယ်ဟာလဲ?',opts:['ဖုန်းနံပါတ်','အိမ်လိပ်စာ','နှစ်သက်သော အစားအစာ','ကျောင်းနာမည်'],ans:2,exp:'နှစ်သက်သော အစားအစာ တင်တာ Safe ဖြစ်ပါတယ်! ဖုန်း၊ လိပ်စာ၊ ကျောင်းနာမည်တွေကတော့ ကာကွယ်ရပါမည်!'},
+  {id:58,topic:'Ch.6',q:'Cyberbullying ဆိုတာ ဘာကိုဆိုလိုသနည်း?',opts:['Computer ဂိမ်းထဲမှာ ရှုံးတာ','Online မှာ တစ်ဦးတစ်ယောက်ကို ဆဲဆိုနှောင့်ယှက်တာ','Cyber Cafe မှာ Online ကစားတာ','Computer Virus တိုက်ခိုက်တာ'],ans:1,exp:'Cyberbullying ဆိုတာ Online မှာ Message, Post, Photo တွေကို အသုံးပြုပြီး တစ်ဦးကို ဆဲဆို နှောင့်ယှက်တာပါ!'},
+  {id:59,topic:'Ch.6',q:'Online မှာ ထူးဆန်းသော Message ရရင် ဘာလုပ်သင့်?',opts:['Reply ပြန်ပြောပြီး ဆက်ကြည့်','Ignore လုပ်ပြီး ကိုယ်တိုင် ဖြေရှင်း','ချက်ချင်း အဖေ/အမေ ဒါမှမဟုတ် ဆရာမကို ပြောပြ','Delete လုပ်ပြီး ကိုယ်တိုင် ထားလိုက်'],ans:2,exp:'ထူးဆန်းသော Message တွေ ရရင် ချက်ချင်း လူကြီးမောင်းကို ပြောပါ! ကိုယ်တိုင် ဖြေရှင်းဖို့ မကြိုးစားပါနဲ့!'},
+  {id:60,topic:'Ch.6',q:'ကောင်းသော Password ပါဝင်ရမည့် အချက်မှာ မပါသောဟာ ဘယ်ဟာလဲ?',opts:['စာလုံးကြီး (A-Z) ပါရမည်','ဂဏန်း (0-9) ပါရမည်','မိဘနာမည် ပါရမည်','Special Character (!@#) ပါရမည်'],ans:2,exp:'Password ထဲမှာ မိဘနာမည်၊ မွေးနေ့ ကဲ့သို့ ခန့်မှန်းလွယ်သော အချက်တွေ မထည့်ပါနဲ့!'}
+];
+
+var QUIZ_COUNT=10,activeQuestions=[],userAnswers={},submitted=false;
+
+function shuffle(arr){var a=[...arr];for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+function buildQuiz(){
+  activeQuestions=shuffle(ALL_QUESTIONS).slice(0,QUIZ_COUNT);
+  userAnswers={};submitted=false;
+  var container=document.getElementById('quiz-questions');container.innerHTML='';
+  activeQuestions.forEach(function(q,idx){
+    var optIndices=shuffle([0,1,2,3]);
+    var shuffledOpts=optIndices.map(function(i){return q.opts[i];});
+    var correctIdx=optIndices.indexOf(q.ans);
+    var div=document.createElement('div');div.className='quiz-card';div.id='qcard_'+idx;
+    div.innerHTML='<div class="quiz-number">မေးခွန်း '+(idx+1)+'/'+QUIZ_COUNT+' <span style="font-size:11px;opacity:.7">['+q.topic+']</span></div>'+
+      '<div class="quiz-q">'+q.q+'</div>'+
+      '<div class="quiz-options" id="qopts_'+idx+'">'+
+      shuffledOpts.map(function(opt,oi){
+        var isC=(oi===correctIdx);
+        return '<button class="quiz-opt" onclick="pickAnswer('+idx+','+oi+','+isC+',\''+encodeURIComponent(q.exp)+'\')">'+['A','B','C','D'][oi]+'. '+opt+'</button>';
+      }).join('')+
+      '</div><div class="quiz-result" id="qres_'+idx+'"></div>';
+    container.appendChild(div);
+  });
+  document.getElementById('submit-btn').disabled=false;
+  document.getElementById('quiz-area').style.display='block';
+  document.getElementById('score-panel').style.display='none';
+}
+
+function pickAnswer(qIdx,optIdx,isCorrect,expEncoded){
+  if(submitted)return;
+  var opts=document.querySelectorAll('#qopts_'+qIdx+' .quiz-opt');
+  opts.forEach(function(o){o.disabled=true;});
+  var res=document.getElementById('qres_'+qIdx);
+  var exp=decodeURIComponent(expEncoded);
+  userAnswers[qIdx]=isCorrect;
+  if(isCorrect){opts[optIdx].classList.add('correct');res.className='quiz-result show-correct';res.innerHTML='🎉 မှန်ပါတယ်! '+exp;}
+  else{
+    opts[optIdx].classList.add('wrong');
+    opts.forEach(function(o){if(o.getAttribute('onclick')&&o.getAttribute('onclick').indexOf(',true,')!==-1)o.classList.add('correct');});
+    res.className='quiz-result show-wrong';res.innerHTML='❌ မမှန်ဘူး! '+exp;
+  }
+}
+
+function submitQuiz(){
+  submitted=true;document.getElementById('submit-btn').disabled=true;
+  document.querySelectorAll('.quiz-opt').forEach(function(o){o.disabled=true;});
+  var score=0;activeQuestions.forEach(function(_,idx){if(userAnswers[idx]===true)score++;});
+  document.getElementById('quiz-area').style.display='none';
+  document.getElementById('score-panel').style.display='block';
+  document.getElementById('score-got').textContent=score;
+  var emoji='😢',title='ကြိုးစားဦးနော်!';
+  if(score===10){emoji='🏆';title='Perfect Score! ⭐ Star!';}else if(score>=8){emoji='🌟';title='အလွန်ကောင်းတယ်!';}else if(score>=6){emoji='😊';title='ကောင်းပါတယ်!';}else if(score>=4){emoji='💪';title='ထပ်ကြိုးစားပါ!';}
+  var pct=Math.round(score/QUIZ_COUNT*100);
+  var msg=score===10?'💯 Perfect! မေးခွန်း ၆၀ ထဲမှ Random ၁၀ ဖြေပြီး အကုန်မှန်ပါတယ်!':score>=8?'🌟 '+pct+'%! ကောင်းမွန်သော နားလည်မှု!':score>=6?'👍 '+pct+'%! Chapters ပြန်ဖတ်ပြီး Score တိုးချင့်ပါ!':'📖 '+pct+'% — Retry နှိပ်ပြီး ထပ်ကြိုးစားပါ!';
+  document.getElementById('score-emoji').textContent=emoji;
+  document.getElementById('score-title').textContent=title+' ('+score+'/'+QUIZ_COUNT+')';
+  document.getElementById('score-msg').textContent=msg;
+  var topicMap={};
+  activeQuestions.forEach(function(q,idx){if(!topicMap[q.topic])topicMap[q.topic]={got:0,total:0};topicMap[q.topic].total++;if(userAnswers[idx]===true)topicMap[q.topic].got++;});
+  document.getElementById('score-bars-list').innerHTML=Object.entries(topicMap).map(function(e){var t=e[0],g=e[1].got,tot=e[1].total,p=Math.round(g/tot*100);return'<div class="score-bar-row">'+t+' ('+g+'/'+tot+')<div class="score-bar-bg"><div class="score-bar-fill" style="width:0%" data-pct="'+p+'"></div></div></div>';}).join('');
+  setTimeout(function(){document.querySelectorAll('.score-bar-fill').forEach(function(b){b.style.width=b.getAttribute('data-pct')+'%';});},200);
+  var html='';activeQuestions.forEach(function(q,idx){var ok=userAnswers[idx]===true;html+='<div style="padding:8px 0;border-bottom:1px solid #f0f0f0;display:flex;align-items:flex-start;gap:8px"><span style="font-size:16px">'+(ok?'✅':'❌')+'</span><div><strong style="font-size:13px">'+q.q+'</strong><br><span style="color:#888;font-size:12px">'+(ok?'မှန်ပါတယ်!':'"'+q.opts[q.ans]+'" ဟာ မှန်ကန်သော အဖြေပါ')+'</span></div></div>';});
+  document.getElementById('review-list').innerHTML=html;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function retryQuiz(){buildQuiz();window.scrollTo({top:0,behavior:'smooth'});}
+
+/* ── INIT ── */
+document.addEventListener('DOMContentLoaded',function(){
+  var grid=document.getElementById('sc-grid');
+  if(grid){
+    shortcuts.forEach(function(s){
+      var el=document.createElement('div');el.className='sc-item';
+      el.innerHTML='<div class="sc-key">'+s.key+'</div><div class="sc-desc">'+s.desc+'</div>';
+      el.addEventListener('click',function(){
+        document.querySelectorAll('.sc-item').forEach(function(x){x.classList.remove('active');});
+        el.classList.add('active');setTimeout(function(){el.classList.remove('active');},300);
+        document.getElementById('sc-icon').textContent=s.icon;
+        document.getElementById('sc-title').textContent=s.key+' — '+s.title;
+        document.getElementById('sc-info').textContent=s.info;
+        var anim=document.getElementById('sc-anim');anim.style.display='block';anim.textContent=s.anim;
+      });
+      grid.appendChild(el);
+    });
+  }
+  showChap(1);
+});
+</script>
+</body>
+</html>
