@@ -179,6 +179,80 @@ body{font-family:'Nunito',sans-serif;background:#f0f4ff;color:#2d2d2d;min-height
 .quiz-submit{background:linear-gradient(135deg,#f7971e,#ffd200);color:#fff;border:none;border-radius:12px;padding:14px 32px;font-family:'Fredoka One',cursive;font-size:18px;cursor:pointer;display:block;margin:20px auto 0;transition:transform .2s}
 .quiz-submit:hover{transform:scale(1.04)}
 .quiz-submit:disabled{opacity:.6;cursor:not-allowed}
+
+/* ══ MOBILE RESPONSIVE ══ */
+@media (max-width: 600px) {
+  .book-container{padding:10px}
+  .cover{padding:28px 18px;border-radius:18px}
+  .cover h1{font-size:26px}
+  .cover-sub{font-size:13px}
+  .chapter-nav{gap:6px}
+  .chap-btn{padding:7px 11px;font-size:11px;border-radius:40px}
+  .chapter-header{padding:20px 18px 16px;border-radius:16px}
+  .chapter-header h2{font-size:20px}
+  .card{padding:14px 14px;border-radius:14px;margin-bottom:10px}
+  .card h3{font-size:16px}
+  .text-body{font-size:13px}
+  .illus-item{min-width:80px;padding:12px 8px}
+  .illus-item .label{font-size:12px}
+  .cycle-step{min-width:80px;padding:10px 12px}
+  .cycle-step .icon{font-size:22px}
+  .cycle-step .name{font-size:13px}
+  .hw-grid{grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:8px}
+  .hw-card{padding:10px}
+  .hw-card .hw-name{font-size:12px}
+  .sc-grid{grid-template-columns:repeat(auto-fit,minmax(110px,1fr))}
+  .sc-item{padding:8px 10px;gap:7px}
+  .sc-key{font-size:10px;padding:3px 6px}
+  .sc-desc{font-size:11px}
+  .sc-demo{padding:12px 14px;min-height:60px}
+  .sc-demo-icon{font-size:24px}
+  .rule-card{padding:12px 14px;gap:10px}
+  .rule-icon{font-size:26px}
+  .rule-title{font-size:14px}
+  .rule-short{font-size:12px}
+  .sm-grid{grid-template-columns:repeat(2,1fr)}
+  .sw-row{flex-direction:column}
+  .sw-item{min-width:unset}
+  .quiz-card{padding:16px 14px}
+  .quiz-q{font-size:15px}
+  .quiz-opt{font-size:13px;padding:9px 12px}
+  .score-title{font-size:22px}
+  .score-num{font-size:44px}
+  .how-step-text{font-size:12px}
+  .history-trigger .ht-year{font-size:18px}
+  .history-trigger .ht-name{font-size:13px}
+  .fake-desktop .desktop-area{padding:12px;gap:12px;min-height:120px}
+  .desk-icon-img{font-size:26px}
+  .desk-icon-name{font-size:10px}
+  .scenario-card{padding:14px}
+  .scenario-q{font-size:13px}
+  .scenario-opt{font-size:12px;padding:8px 10px}
+}
+
+@media (min-width:601px) and (max-width:900px) {
+  .book-container{padding:14px}
+  .cover h1{font-size:32px}
+  .chap-btn{padding:8px 13px;font-size:12px}
+  .chapter-header h2{font-size:24px}
+  .card{padding:18px 20px}
+  .hw-grid{grid-template-columns:repeat(auto-fit,minmax(130px,1fr))}
+  .sc-grid{grid-template-columns:repeat(auto-fit,minmax(120px,1fr))}
+  .sm-grid{grid-template-columns:repeat(2,1fr)}
+  .quiz-q{font-size:16px}
+}
+
+/* Touch friendly tap targets */
+@media (hover:none) and (pointer:coarse) {
+  .chap-btn{min-height:40px;min-width:44px}
+  .quiz-opt{min-height:44px}
+  .hw-card{min-height:80px}
+  .sc-item{min-height:44px}
+  .rule-card{min-height:56px}
+  .scenario-opt{min-height:44px}
+  .how-works-btn{min-height:40px}
+}
+
 </style>
 </head>
 <body>
@@ -230,15 +304,15 @@ body{font-family:'Nunito',sans-serif;background:#f0f4ff;color:#2d2d2d;min-height
     <p class="text-body">ကွန်ပျူတာဆိုတာ ဂိမ်းဆော့ဖို့ ဒါမှမဟုတ် စာရိုက်ဖို့သက်သက် မဟုတ်ဘူး — သူဟာ အချက်အလက်တွေကို တစ်စက္ကန့်မှာ <strong>billion</strong> ချီပြီး တွက်ချက်နိုင်တဲ့ Electronic Device တစ်ခုပါ!</p>
     <button class="how-works-btn" onclick="toggleHow('how1')">⚙️ ကွန်ပျူတာ ဘယ်လို အလုပ်လုပ်သလဲ?</button>
     <div class="how-panel" id="how1">
-      <div class="how-step"><div class="how-step-num" style="background:#f5576c">1</div><div class="how-step-text"><strong>Electricity ဝင်လာတယ်</strong> — Power button နှိပ်လိုက်တာနဲ့ Electric current တွေ Circuit ထဲ ဝင်ကာ CPU, RAM, Storage တွေ စပြီးအသက်ဝင်လာတယ်</div></div>
+      <div class="how-step"><div class="how-step-num" style="background:#f5576c">1</div><div class="how-step-text"><strong>Electricity ဝင်လာတယ်</strong> — Power button နှိပ်လိုက်တာနဲ့ Electric current တွေ Circuit ထဲ ဝင်ကာ CPU, RAM, Storage တွေ စသက်ဝင်လာတယ်</div></div>
       <div class="how-step"><div class="how-step-num" style="background:#4facfe">2</div><div class="how-step-text"><strong>BIOS/UEFI ပြေးတယ်</strong> — Motherboard ရဲ့ chip ထဲမှာ BIOS ဆိုတဲ့ tiny program ရှိပြီး hardware အကုန် စစ်ဆေးပေးတယ်</div></div>
       <div class="how-step"><div class="how-step-num" style="background:#43e97b">3</div><div class="how-step-text"><strong>OS Load ဖြစ်တယ်</strong> — Storage (SSD/HDD) ထဲက Windows ကို RAM ထဲ ကူးတင်တယ်</div></div>
       <div class="how-step"><div class="how-step-num" style="background:#a18cd1">4</div><div class="how-step-text"><strong>0 နဲ့ 1 တွက်တယ်</strong> — CPU မှာ transistor သန်းချီ ပါပြီး ON/OFF (1/0) ဖြင့် Calculation ထုတ်ပေးပါတယ်</div></div>
-      <div class="how-step"><div class="how-step-num" style="background:#f7971e">5</div><div class="how-step-text"><strong>မင်း မြင်ရတယ်</strong> — ရလဒ်ကို GPU → Monitor → မင်းဆီ ပေးပို့တယ်! ဒီ cycle ကို တစ်စက္ကန့်မှာ billion ကြိမ် ဖြစ်ပေတယ်!</div></div>
+      <div class="how-step"><div class="how-step-num" style="background:#f7971e">5</div><div class="how-step-text"><strong>မင်း မြင်ရတယ်</strong> — ရလဒ်ကို GPU → Monitor → မင်းရဲ့မျက်စိ ဆီ ပေးပို့တယ်!</div></div>
     </div>
     <div class="fun-fact" style="background:#fff0f8;border-left:4px solid #f5576c;margin-top:12px">
       <div class="fun-fact-icon">🤩</div>
-      <div class="fun-fact-text" style="color:#c0392b"><strong>Did you know?</strong> မင်းရဲ့ CPU ဟာ တစ်စက္ကန့်မှာ <strong>3,000,000,000 ကြိမ်</strong> (3 GHz) အလုပ် လုပ်ဆောင်နိုင်တယ်! လူသားတွေ အကြိမ်ရေဆယ်ချက် ရေနိုင်တဲ့ အချိန်မှာ CPU က တစ်ဘီလျံချီ အထိတွက်ချက်နိုင်တယ်! 🚀</div>
+      <div class="fun-fact-text" style="color:#c0392b"><strong>Did you know?</strong> မင်းရဲ့ CPU ဟာ တစ်စက္ကန့်မှာ <strong>3,000,000,000 ကြိမ်</strong> (3 GHz) လုပ်ဆောင်နိုင်တယ်! 🚀</div>
     </div>
   </div>
   <div class="card">
@@ -256,11 +330,11 @@ body{font-family:'Nunito',sans-serif;background:#f0f4ff;color:#2d2d2d;min-height
     <p class="text-body" style="margin-bottom:14px">ကွန်ပျူတာ ဆိုတာ ရုတ်တရက် ဖြစ်ပေါ်လာတာ မဟုတ်ဘူး — သူ့မှာ နှစ် ၁၀၀ ကျော် သမိုင်း ရှိပါတယ်!</p>
     <div class="history-card">
       <button class="history-trigger" onclick="toggleHistory(this)"><span class="ht-icon">🧮</span><div><div class="ht-year">1822</div><div class="ht-name">Babbage's Difference Engine</div><div class="ht-tagline">ပထမဆုံး Mechanical Computer</div></div><span class="ht-arrow">▼</span></button>
-      <div class="history-body"><p>Charles Babbage ဆိုတဲ့ ဗြိတိသျှ mathematician တစ်ယောက်က <strong>mechanical gears</strong> တွေသုံးပြီး ဂဏန်းတွက်ချက်မှု ဖြေရှင်းနိုင်တဲ့ engine ကြီးကို တည်ဆောက်ခဲ့တယ်။  ဒါဟာ ကွန်ပျူတာ သမိုင်းရဲ့ ပထမဦးဆုံး chapter ပါ!!</p><div class="hb-facts"><span class="hb-fact">⚙️ Gears သုံး</span><span class="hb-fact">📐 ဂဏန်းတွက်ဖို့</span><span class="hb-fact">🇬🇧 UK မှာ တည်ဆောက်</span></div></div>
+      <div class="history-body"><p>Charles Babbage ဆိုတဲ့ ဗြိတိသျှ mathematician တစ်ယောက်က <strong>mechanical gears</strong> တွေသုံးပြီး ဂဏန်းတွက်ချက်မှု ဖြေရှင်းနိုင်တဲ့ engine ကြီးကို တည်ဆောက်ခဲ့တယ်!</p><div class="hb-facts"><span class="hb-fact">⚙️ Gears သုံး</span><span class="hb-fact">🇬🇧 UK မှာ တည်ဆောက်</span></div></div>
     </div>
     <div class="history-card">
       <button class="history-trigger" onclick="toggleHistory(this)"><span class="ht-icon">🏛️</span><div><div class="ht-year">1945</div><div class="ht-name">ENIAC — ပထမဆုံး Electronic Computer</div><div class="ht-tagline">အိမ်ကြီးလောက် ရှိတဲ့ Computer!</div></div><span class="ht-arrow">▼</span></button>
-      <div class="history-body"><p>အမေရိကန် Pennsylvania တက္ကသိုလ်မှာ တည်ဆောက်ခဲ့တဲ့ ENIAC ဟာ ပထမဆုံး <strong>Electronic Computer</strong> ပါ။ သူ့မှာ <strong>18,000 vacuum tubes</strong>  ရှိပြီး ၂ ကြိမ် နှိပ်ချိန်မှာ multiplication တစ်ခုကို တွက်နိုင်ခဲ့တယ်! ဒါပေမဲ့ Room တစ်ခုလုံး ကျယ်ပြီး 27 tonnes ထိရှိပါတယ်!</p><div class="hb-facts"><span class="hb-fact">🏠 167m² ကျယ်</span><span class="hb-fact">💡 18,000 Tubes</span><span class="hb-fact">🇺🇸 USA</span></div></div>
+      <div class="history-body"><p>ENIAC မှာ <strong>18,000 vacuum tubes</strong> ရှိပြီး Room တစ်ခုလုံး ကျယ်ပြီး 27 tonnes ထိရှိပါတယ်!</p><div class="hb-facts"><span class="hb-fact">🏠 167m² ကျယ်</span><span class="hb-fact">💡 18,000 Tubes</span><span class="hb-fact">🇺🇸 USA</span></div></div>
     </div>
     <div class="history-card">
       <button class="history-trigger" onclick="toggleHistory(this)"><span class="ht-icon">🍎</span><div><div class="ht-year">1984</div><div class="ht-name">Apple Macintosh — Desktop Revolution</div><div class="ht-tagline">Mouse + GUI ကို လူတိုင်းသုံးလာစ</div></div><span class="ht-arrow">▼</span></button>
@@ -268,7 +342,7 @@ body{font-family:'Nunito',sans-serif;background:#f0f4ff;color:#2d2d2d;min-height
     </div>
     <div class="history-card">
       <button class="history-trigger" onclick="toggleHistory(this)"><span class="ht-icon">💻</span><div><div class="ht-year">1991</div><div class="ht-name">World Wide Web — Internet မွေးဖွားတယ်</div><div class="ht-tagline">Tim Berners-Lee ရဲ့ လက်ဆောင်</div></div><span class="ht-arrow">▼</span></button>
-      <div class="history-body"><p>Tim Berners-Lee က <strong>HTML, URL, HTTP</strong> ကို တီထွင်ပြီး ကျွန်ုပ်တို့ ယနေ့ သုံးနေတဲ့ Internet ကို ဖန်တီးခဲ့တယ်။ ဒါမှ Google, YouTube, Facebook ဆိုတဲ့ အရာအားလုံး ဖြစ်လာနိုင်ခဲ့တာပါ!</p><div class="hb-facts"><span class="hb-fact">🌐 HTML တီထွင်</span><span class="hb-fact">🇬🇧 Tim Berners-Lee</span><span class="hb-fact">📡 CERN မှာ</span></div></div>
+      <div class="history-body"><p>Tim Berners-Lee က <strong>HTML, URL, HTTP</strong> ကို တီထွင်ပြီး ကျွန်ုပ်တို့ ယနေ့ သုံးနေတဲ့ Internet ကို ဖန်တီးခဲ့တယ်!</p><div class="hb-facts"><span class="hb-fact">🌐 HTML တီထွင်</span><span class="hb-fact">🇬🇧 Tim Berners-Lee</span></div></div>
     </div>
     <div class="history-card">
       <button class="history-trigger" onclick="toggleHistory(this)"><span class="ht-icon">📱</span><div><div class="ht-year">2007</div><div class="ht-name">iPhone — ကွန်ပျူတာ Pocket ထဲ ဝင်တယ်</div><div class="ht-tagline">Steve Jobs ကမ္ဘာကြီးကို ပြောင်းလဲ</div></div><span class="ht-arrow">▼</span></button>
@@ -309,7 +383,6 @@ body{font-family:'Nunito',sans-serif;background:#f0f4ff;color:#2d2d2d;min-height
       <div class="how-step"><div class="how-step-num" style="background:#43e97b">2</div><div class="how-step-text"><strong>Decode</strong> — Instruction ကို 0/1 binary signal တွေ အဖြစ် ပြောင်းတယ်</div></div>
       <div class="how-step"><div class="how-step-num" style="background:#f7971e">3</div><div class="how-step-text"><strong>Execute</strong> — ALU က တွက်ချက်မှုကို လုပ်တယ် (+, -, ×, ÷)</div></div>
       <div class="how-step"><div class="how-step-num" style="background:#a18cd1">4</div><div class="how-step-text"><strong>Store</strong> — ရလဒ်ကို Register ဒါမှမဟုတ် RAM ထဲ ထည့်ထားတယ်</div></div>
-      <div style="background:#fff;border-radius:10px;padding:10px;margin-top:8px;font-size:12px;color:#666;border:1px solid #e0e7ff">💡 ဒီ cycle ကို "<strong>Fetch-Decode-Execute</strong>" cycle လို့ ခေါ်ပြီး Modern CPU တစ်လုံးမှာ ဒီ cycle ကို တစ်စက္ကန့်မှာ <strong>billions</strong> ကြိမ် ပြုလုပ်နိုင်ပါတယ်!</div>
     </div>
     <div class="illus-row" style="margin-top:12px">
       <div class="illus-item" style="background:#fff3e0"><div style="font-size:24px;margin-bottom:4px">🔵</div><div class="label" style="color:#c87800">Intel Core i5/i7</div><div class="desc">Office/School PC</div></div>
@@ -340,7 +413,7 @@ body{font-family:'Nunito',sans-serif;background:#f0f4ff;color:#2d2d2d;min-height
         <div style="font-weight:800;color:#c87800;margin-bottom:6px">HDD (Hard Disk Drive)</div>
         <div style="font-size:12px;color:#555;line-height:1.7">• Magnetic Disk သုံး<br>• နှေးကွေး<br>• Disk ပတ်ရသော Motor ပါ<br>• ဈေးနှုန်း ချိုသာ</div>
         <button class="how-works-btn" style="margin-top:8px;font-size:11px;padding:6px 12px;background:linear-gradient(135deg,#f5a623,#f7971e)" onclick="toggleHow('howhdd')">⚙️ HDD ဘယ်လို အလုပ်လုပ်သလဲ?</button>
-        <div class="how-panel" id="howhdd" style="font-size:12px">Magnetic coating ပါတဲ့ <strong>spinning disk</strong> ပေါ်မှာ Read/Write head က ရွှေ့ကာ data ဖတ်/ရေးတယ်။ CD တစ်ချပ်ပတ်သလို disk ကိုပတ်ပြီး data ရတာ ဆိုတော့ SSD ထက် ပိုနှေးပါတယ်!</div>
+        <div class="how-panel" id="howhdd" style="font-size:12px">Magnetic coating ပါတဲ့ <strong>spinning disk</strong> ပေါ်မှာ Read/Write head က ရွှေ့ကာ data ဖတ်/ရေးတယ်!</div>
       </div>
     </div>
     <div class="fun-fact" style="background:#e8f4ff;border-left:4px solid #4facfe;margin-top:12px">
@@ -523,7 +596,7 @@ body{font-family:'Nunito',sans-serif;background:#f0f4ff;color:#2d2d2d;min-height
           <strong>Online မှာ မတင်ရသော အချက်အလက်များ:</strong><br>
           ❌ ဖုန်းနံပါတ် &nbsp; ❌ အိမ်လိပ်စာ &nbsp; ❌ ကျောင်းနာမည်<br>
           ❌ မိဘနာမည် &nbsp; ❌ Location (လက်ရှိနေရာ)<br><br>
-          မသိသောသူတွေက ဒီအချက်အလက်တွေကို အသုံးပြုပြီး မင်းကို ခြိမ်းခြောက်သောနည်းဖြင့် ချဉ်းကပ်နိုင်ပါတယ်!
+          မသိသောသူတွေက ဒီအချက်အလက်တွေကို အသုံးပြုပြီး မင်းကို ကြောက်တတ်သောနည်းဖြင့် ချဉ်းကပ်နိုင်ပါတယ်!
         </div>
       </div>
     </div>
@@ -535,7 +608,7 @@ body{font-family:'Nunito',sans-serif;background:#f0f4ff;color:#2d2d2d;min-height
         <div class="rule-short">မသိတဲ့သူ Link ပို့ရင် မနှိပ်ပါနဲ့! Online မှာ မသိသောသူနဲ့ မပြောပါနဲ့!</div>
         <div class="rule-detail">
           🔴 မသိတဲ့သူ Message ပို့ရင် — ပြန်မပြောပဲ ပိတ်ပစ်ပါ<br>
-          🔴 "ဆုကြီးဆွဲမိပြီ!" ဆိုတဲ့ Link တွေ — Scam ပါ မနှိပ်ပါနဲ့<br>
+          🔴 "ဆုကြီးဆွဲပြီ!" ဆိုတဲ့ Link တွေ — Scam ပါ မနှိပ်ပါနဲ့<br>
           🔴 "Free Gift" "Click here" တွေ — Virus/Malware ဖြစ်နိုင်<br>
           🔴 ဓာတ်ပုံပေးဖို့ တောင်းတဲ့ မသိတဲ့သူ — ချက်ချင်း ပိတ်ပစ်ပါ
         </div>
@@ -546,11 +619,12 @@ body{font-family:'Nunito',sans-serif;background:#f0f4ff;color:#2d2d2d;min-height
       <div style="flex:1">
         <div class="rule-badge">Rule 4</div>
         <div class="rule-title">ယဉ်ကျေးစွာ ပြောဆိုပါ (Netiquette)</div>
-        <div class="rule-short">Online မှာလည်း Real Life မှာလိုပဲ ယဉ်ယဉ်ကျေးကျေး ဆက်ဆံသင့်ပါတယ်!</div>
+        <div class="rule-short">Online မှာလည်း Real Life မှာလိုပဲ ယဉ်ယဉ်ကျေးကျေး ဆက်ဆံရပါမည်!</div>
         <div class="rule-detail">
           ✅ Please, Thank You, Sorry သုံးပါ<br>
           ✅ တခြားသူ ဓာတ်ပုံကို ခွင့်မပါဘဲ မတင်ပါနဲ့<br>
           ❌ Cyberbullying (Online Bully လုပ်တာ) မလုပ်ပါနဲ့<br>
+          ❌ ALL CAPS နဲ့ ရိုက်တာ = အော်နေသလိုဖြစ်တယ်<br>
           ❌ Hate speech, ဆဲရေးတာ မလုပ်ပါနဲ့
         </div>
       </div>
@@ -566,7 +640,7 @@ body{font-family:'Nunito',sans-serif;background:#f0f4ff;color:#2d2d2d;min-height
           🚨 တစ်ဦးတစ်ယောက်က Online မှာ Bully လုပ်တာ<br>
           🚨 ကြောက်စရာ ကောင်းတဲ့ Message တွေ ရတာ<br>
           🚨 ကိုယ့် Account ကို တခြားသူ ဝင်နေတာ သံသယဖြစ်ရင်<br><br>
-          <div style="background:#e8faf0;border-radius:8px;padding:8px 12px;font-size:12px;color:#1a8a4e;font-weight:700">✅ လူကြီးများကို ပြောပြတာဟာ အားနည်းတာ မဟုတ်ဘူး — ဆင်ခြင်တုံတရားရှိတာပါပဲ!</div>
+          <div style="background:#e8faf0;border-radius:8px;padding:8px 12px;font-size:12px;color:#1a8a4e;font-weight:700">✅ ပြောတာဟာ အားနည်းတာ မဟုတ်ဘူး — ဆင်ခြင်တုံတရားရှိတာပဲ!</div>
         </div>
       </div>
     </div>
@@ -615,14 +689,14 @@ body{font-family:'Nunito',sans-serif;background:#f0f4ff;color:#2d2d2d;min-height
       <div style="background:rgba(255,255,255,.15);color:#fff;border-radius:8px;padding:6px 14px;font-size:12px;font-weight:700">🤐 Privacy ထိန်း</div>
       <div style="background:rgba(255,255,255,.15);color:#fff;border-radius:8px;padding:6px 14px;font-size:12px;font-weight:700">🚫 Links မနှိပ်</div>
       <div style="background:rgba(255,255,255,.15);color:#fff;border-radius:8px;padding:6px 14px;font-size:12px;font-weight:700">💬 Netiquette</div>
-      <div style="background:rgba(255,255,255,.15);color:#fff;border-radius:8px;padding:6px 14px;font-size:12px;font-weight:700">👨‍👩‍👧 လူကြီးကိုပြောပြ</div>
+      <div style="background:rgba(255,255,255,.15);color:#fff;border-radius:8px;padding:6px 14px;font-size:12px;font-weight:700">👨‍👩‍👧 လူကြီးပြော</div>
     </div>
   </div>
 </div>
 
 <!-- QUIZ -->
 <div class="chapter chq" id="ch7">
-  <div class="chapter-header"><h2>🎯 Final Quiz — မင်းရဲ့ အသိပညာ စစ်ဆေးမယ်!</h2><p>မေးခွန်း ၆၀ ထဲမှ Random ၁၀ ခု </p></div>
+  <div class="chapter-header"><h2>🎯 Final Quiz — မင်းရဲ့ အသိပညာ စစ်ဆေးမယ်!</h2><p>မေးခွန်း ၆၀ ထဲမှ Random ၁၀ ခု · Refresh လုပ်တိုင်း မေးခွန်းအသစ်</p></div>
   <div id="quiz-area">
     <div id="quiz-questions"></div>
     <button class="quiz-submit" id="submit-btn" onclick="submitQuiz()">📊 Score ကြည့်မယ်!</button>
@@ -649,9 +723,9 @@ body{font-family:'Nunito',sans-serif;background:#f0f4ff;color:#2d2d2d;min-height
 <script>
 /* ── HW DETAIL ── */
 var hwDetails = {
-  keyboard:'⌨️ <strong>Keyboard </strong><br>သင်ရိုက်တဲ့ Key တိုင်းဟာ electrical signal အဖြစ် CPU ဆီ ရောက်ပါတယ်။ QWERTY layout ဟာ 1868 မှာ Typewriter ခေတ်မှ ဆင်းသက်လာပြီး ကမ္ဘာ Standard ဖြစ်နေဆဲပါ! Key အရေအတွက် 104 ခု ရှိပါတယ်!',
-  mouse:'🖱 <strong>Mouse </strong><br>Mouse ကို Douglas Engelbart က 1964 မှာ Wood နဲ့ တီထွင်ခဲ့တယ်! ယနေ့ Optical Mouse တွေကတော့ LED Light နဲ့ Sensor ကို သုံးပြီး တစ်စက္ကန့် 1000+ ကြိမ် ဖတ်ကာ Cursor ကို ရွှေ့ပါတယ်!',
-  mic:'🎤 <strong>Microphone </strong><br>မင်းရဲ့ အသံ (Sound Waves) ကို Diaphragm ဆိုတဲ့ thin membrane က vibrate ဖြစ်ကာ Electrical Signal အဖြစ် ပြောင်းပြီး Digital Data ဖြစ်သွားတယ်! Zoom call, Recording အားလုံး ဒီပုံစံပဲ!',
+  keyboard:'⌨️ <strong>Keyboard (ကီးဘုတ်)</strong><br>သင်ရိုက်တဲ့ Key တိုင်းဟာ electrical signal အဖြစ် CPU ဆီ ရောက်ပါတယ်။ QWERTY layout ဟာ 1868 မှာ Typewriter ခေတ်မှ ဆင်းသက်လာပြီး ကမ္ဘာ Standard ဖြစ်နေဆဲပါ! Key အရေအတွက် 104 ခု ရှိပါတယ်!',
+  mouse:'🖱 <strong>Mouse (မောက်ကိုင်)</strong><br>Mouse ကို Douglas Engelbart က 1964 မှာ Wood နဲ့ တီထွင်ခဲ့တယ်! ယနေ့ Optical Mouse တွေကတော့ LED Light နဲ့ Sensor ကို သုံးပြီး တစ်စက္ကန့် 1000+ ကြိမ် ဖတ်ကာ Cursor ကို ရွှေ့ပါတယ်!',
+  mic:'🎤 <strong>Microphone (မိုက်ခ်)</strong><br>မင်းရဲ့ အသံ (Sound Waves) ကို Diaphragm ဆိုတဲ့ thin membrane က vibrate ဖြစ်ကာ Electrical Signal အဖြစ် ပြောင်းပြီး Digital Data ဖြစ်သွားတယ်! Zoom call, Recording အားလုံး ဒီပုံစံပဲ!',
   webcam:'📸 <strong>Webcam</strong><br>Webcam မှာ Image Sensor (CMOS chip) ရှိပြီး တစ်စက္ကန့်မှာ 30-60 Frame ရိုက်ကူးပြီး Digital Video Data အဖြစ် ပြောင်းကာ Internet ကနေ ပို့ပေးပါတယ်!'
 };
 function showHwDetail(k){var d=document.getElementById('hw-detail');d.style.display='block';d.innerHTML=hwDetails[k]||'';}
@@ -703,7 +777,7 @@ var shortcuts=[
   {key:'Ctrl+Y',desc:'Redo',icon:'↪️',title:'Redo — ပြန်လုပ်သည်',info:'Undo လုပ်ပြီးနောက် ပြန်ယူနိုင်တယ်!',anim:'Ctrl+Z → Ctrl+Y → Restored! ✓'},
   {key:'Alt+F4',desc:'Close App',icon:'❌',title:'App ပိတ်သည်',info:'လက်ရှိ App/Window ကို ချက်ချင်း ပိတ်တယ်!',anim:'Alt+F4 → [App Closing...] → Closed ✓'},
   {key:'Win+D',desc:'Show Desktop',icon:'🖥️',title:'Desktop ပြ/ဝှက်သည်',info:'Windows အကုန်လုံးကို တစ်ချက်နဲ့ Minimize/Restore လုပ်တယ်!',anim:'Win+D → All Windows Minimized → Desktop ✓'},
-  {key:'Win+L',desc:'Lock PC',icon:'🔒',title:'PC Lock လုပ်သည်',info:'ကွန်ပျူတာကို Lock လုပ်ပြီး Login Screen ကို ပြတယ်! Screenမှ ထသွားချိန် Privacyဖြစ်ပါသည် မကြာခဏသုံးပါ !',anim:'Win+L → 🔒 Locked → Password required ✓'},
+  {key:'Win+L',desc:'Lock PC',icon:'🔒',title:'PC Lock လုပ်သည်',info:'ကွန်ပျူတာကို Lock လုပ်ပြီး Login Screen ကို ပြတယ်! ထသွားချိန် Privacy!',anim:'Win+L → 🔒 Locked → Password required ✓'},
   {key:'Ctrl+Tab',desc:'Switch Tab',icon:'🔄',title:'Browser Tab ပြောင်းသည်',info:'Browser ထဲမှာ Tab တွေကြား ပြောင်းတယ်!',anim:'Tab1 → Ctrl+Tab → Tab2 → Tab3 ✓'},
   {key:'PrtSc',desc:'Screenshot',icon:'📸',title:'Screenshot ရိုက်သည်',info:'Screen တစ်ခုလုံးကို ကူးပြီး Clipboard ထဲ ထည့်တယ်!',anim:'PrtSc → 📸 Screen Captured → Clipboard ✓'}
 ];
@@ -711,9 +785,9 @@ var shortcuts=[
 /* ── CH.6 FUNCTIONS ── */
 var smDetails={
   youtube:'▶️ <strong>YouTube</strong> — Age 13+. မိဘ ကြည့်ရှုမှုနဲ့ ကလေးများ YouTube Kids ကိုသာ သုံးသင့်ပါတယ်! Comment section မှာ မသိသောသူ Message တွေ သတိထားပါ!',
-  facebook:'👤 <strong>Facebook</strong> — Age 15+. Privacy Settings ကို "Friends Only" ထားပါ! Personal Info (ဖုန်း/လိပ်စာ) Profile မှာ မတင်ပါနဲ့!',
-  tiktok:'🎵 <strong>TikTok</strong> — Age 15+. Account ကို Private ထားပြီး Location Feature ကို ပိတ်ထားပါ!',
-  instagram:'📷 <strong>Instagram</strong> — Age 15+. Account ကို Private ထားပြီး မသိသောသူ Follow Request တွေ Accept မလုပ်ပါနဲ့!'
+  facebook:'👤 <strong>Facebook</strong> — Age 13+. Privacy Settings ကို "Friends Only" ထားပါ! Personal Info (ဖုန်း/လိပ်စာ) Profile မှာ မတင်ပါနဲ့!',
+  tiktok:'🎵 <strong>TikTok</strong> — Age 13+. Account ကို Private ထားပြီး Location Feature ကို ပိတ်ထားပါ!',
+  instagram:'📷 <strong>Instagram</strong> — Age 13+. Account ကို Private ထားပြီး မသိသောသူ Follow Request တွေ Accept မလုပ်ပါနဲ့!'
 };
 function showSmDetail(k){var d=document.getElementById('sm-detail');d.style.display='block';d.innerHTML=smDetails[k]||'';}
 
@@ -756,7 +830,7 @@ var ALL_QUESTIONS=[
   {id:5,topic:'Ch.1',q:'iPhone ကို ဘယ်နှစ်မှာ ထွက်ရှိခဲ့သနည်း?',opts:['2000','2005','2007','2010'],ans:2,exp:'Steve Jobs က 2007 မှာ iPhone မိတ်ဆက်ပြီး Smartphone ခေတ် စတင်ခဲ့ပါတယ်!'},
   {id:6,topic:'Ch.1',q:'CPU တစ်လုံး တစ်စက္ကန့်မှာ ဘယ်နှစ်ကြိမ် တွက်ချက်နိုင်သလဲ?',opts:['တစ်သောင်းကြိမ်','တစ်သန်းကြိမ်','Billion ကြိမ်ကျော်','တစ်ကြိမ်သာ'],ans:2,exp:'Modern CPU (3GHz) ဟာ တစ်စက္ကန့်မှာ 3,000,000,000 ကြိမ် ကျော် တွက်ချက်နိုင်ပါတယ်!'},
   {id:7,topic:'Ch.1',q:'Desktop နဲ့ Laptop ဘာကွာသလဲ?',opts:['Desktop က ပိုမြန်','Laptop က သယ်ယူနိုင်ပြီး Desktop က တစ်နေရာထားသုံး','Desktop က ပိုပေါ့','ကွာခြားချက် မရှိ'],ans:1,exp:'Laptop ဟာ Battery ပါပြီး Portable ဖြစ်ပါတယ်!'},
-  {id:8,topic:'Ch.1',q:'Server ဆိုတာ ဘာကိုဆိုလိုသနည်း?',opts:['အိတ်ဆောင် Device တစ်ခု','Internet Data တွေ သိမ်းပေးသော ကြီးမားသော Computer','Laptop တစ်မျိုး','Software တစ်ခု'],ans:1,exp:'Server ဟာ Website/App Data တွေကို 24/7 သိမ်းဆည်းပြီး User တွေဆီ ပေးပို့နေတဲ့ Computer ပါ!'},
+  {id:8,topic:'Ch.1',q:'Server ဆိုတာ ဘာကိုဆိုလိုသနည်း?',opts:['ဟိုတယ်မှ ဆောင်ရသူ','Internet Data တွေ သိမ်းပေးသော ကြီးမားသော Computer','Laptop တစ်မျိုး','Software တစ်ခု'],ans:1,exp:'Server ဟာ Website/App Data တွေကို 24/7 သိမ်းဆည်းပြီး User တွေဆီ ပေးပို့နေတဲ့ Computer ပါ!'},
   {id:9,topic:'Ch.1',q:"Babbage's Difference Engine ကို ဘာနဲ့ ဖန်တီးခဲ့သနည်း?",opts:['Transistors','Vacuum Tubes','Mechanical Gears','Silicon Chips'],ans:2,exp:'Babbage က 1822 မှာ Mechanical Gears သုံးပြီး ပထမဆုံး Mechanical Computer တည်ဆောက်ခဲ့ပါတယ်!'},
   {id:10,topic:'Ch.1',q:'Output ဆိုတာ ဘာကိုဆိုလိုသနည်း?',opts:['ကွန်ပျူတာကို ပေးသောအချက်','ကွန်ပျူတာမှ ထွက်ပေးသောရလဒ်','Data သိမ်းသောနည်း','CPU အလုပ်လုပ်ပုံ'],ans:1,exp:'Output ဆိုတာ ကွန်ပျူတာ Process ပြီးတဲ့ ရလဒ် — Screen ပြတာ၊ Print ထုတ်တာ တို့ ဖြစ်ပါတယ်!'},
   // Ch.2
