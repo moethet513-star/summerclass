@@ -393,8 +393,8 @@ body{font-family:'Nunito',sans-serif;background:#f0f4ff;color:#2d2d2d;min-height
   <div class="card">
     <h3>📺 Output Devices</h3>
     <div class="hw-grid">
-      <div class="hw-card" style="background:#e8faf0"><div style="font-size:28px;margin-bottom:6px">🖥</div><div class="hw-name" style="color:#1a8a4e">Monitor</div><div class="hw-desc">မျက်နှာပြင်ပေါ် ပြသော</div></div>
-      <div class="hw-card" style="background:#e8faf0"><div style="font-size:28px;margin-bottom:6px">🔊</div><div class="hw-name" style="color:#1a8a4e">Speaker</div><div class="hw-desc">အသံ ထွက်သော ကိရိယာ</div></div>
+      <div class="hw-card" style="background:#e8faf0"><div style="font-size:28px;margin-bottom:6px">🖥</div><div class="hw-name" style="color:#1a8a4e">Monitor</div><div class="hw-desc">မျက်နှာပြင်ပေါ်တွင် ပြသ </div></div>
+      <div class="hw-card" style="background:#e8faf0"><div style="font-size:28px;margin-bottom:6px">🔊</div><div class="hw-name" style="color:#1a8a4e">Speaker</div><div class="hw-desc">စကားပြောသော ကိရိယာ</div></div>
       <div class="hw-card" style="background:#e8faf0"><div style="font-size:28px;margin-bottom:6px">🖨️</div><div class="hw-name" style="color:#1a8a4e">Printer</div><div class="hw-desc">Paper ပေါ် ထုတ်ပေးသော</div></div>
     </div>
   </div>
@@ -428,7 +428,7 @@ body{font-family:'Nunito',sans-serif;background:#f0f4ff;color:#2d2d2d;min-height
   <div class="chapter-header"><h2>💾 Chapter 3: Software</h2><p>The Digital Brain — မမြင်ရသော မရှိမဖြစ်သော!</p></div>
   <div class="card">
     <h3>Software ဆိုတာ ဘာလဲ?</h3>
-    <p class="text-body">Software ကို မျက်စိနဲ့ မြင်မရ၊ လက်နဲ့ မကိုင်ရ — ဒါပေမဲ့ Software မရှိရင် Hardware က သံတိုသံစပါပဲ! Software ဟာ ကွန်ပျူတာကို "ဘာလုပ်ရမလဲ" ဆိုပြီး ပြောပေးတဲ့ Instructions တွေပါ။</p>
+    <p class="text-body">Software ကို မျက်စိနဲ့ မမြင်နိုင်၊ လက်နဲ့ ကိုင်လို့မရပါ — ဒါပေမဲ့ Software မရှိရင် Hardware က သံတိုသံစ တစ်ခုသာသာပါပဲ! Software ဟာ ကွန်ပျူတာကို "ဘာလုပ်ရမလဲ" ဆိုပြီး ပြောပေးတဲ့ Instructions တွေပါ။</p>
     <button class="how-works-btn" onclick="toggleHow('howsw')">⚙️ Software ဘယ်လို Run သလဲ?</button>
     <div class="how-panel" id="howsw">
       <div class="how-step"><div class="how-step-num" style="background:#43e97b">1</div><div class="how-step-text"><strong>Program ကို ဖွင့်တယ်</strong> — Storage ထဲက program file တွေကို RAM ထဲ ကူးတင်တယ်</div></div>
@@ -624,7 +624,6 @@ body{font-family:'Nunito',sans-serif;background:#f0f4ff;color:#2d2d2d;min-height
           ✅ Please, Thank You, Sorry သုံးပါ<br>
           ✅ တခြားသူ ဓာတ်ပုံကို ခွင့်မပါဘဲ မတင်ပါနဲ့<br>
           ❌ Cyberbullying (Online Bully လုပ်တာ) မလုပ်ပါနဲ့<br>
-          ❌ ALL CAPS နဲ့ ရိုက်တာ = အော်နေသလိုဖြစ်တယ်<br>
           ❌ Hate speech, ဆဲရေးတာ မလုပ်ပါနဲ့
         </div>
       </div>
@@ -696,7 +695,7 @@ body{font-family:'Nunito',sans-serif;background:#f0f4ff;color:#2d2d2d;min-height
 
 <!-- QUIZ -->
 <div class="chapter chq" id="ch7">
-  <div class="chapter-header"><h2>🎯 Final Quiz — မင်းရဲ့ အသိပညာ စစ်ဆေးမယ်!</h2><p>မေးခွန်း ၆၀ ထဲမှ Random ၁၀ ခု · Refresh လုပ်တိုင်း မေးခွန်းအသစ်</p></div>
+  <div class="chapter-header"><h2>🎯 Final Quiz — မင်းရဲ့ အသိပညာ စစ်ဆေးမယ်!</h2><p>Random မေးခွန်း ၁၀ ခု · Refresh လုပ်တိုင်း မေးခွန်းအသစ်ရပါမယ်</p></div>
   <div id="quiz-area">
     <div id="quiz-questions"></div>
     <button class="quiz-submit" id="submit-btn" onclick="submitQuiz()">📊 Score ကြည့်မယ်!</button>
@@ -723,9 +722,9 @@ body{font-family:'Nunito',sans-serif;background:#f0f4ff;color:#2d2d2d;min-height
 <script>
 /* ── HW DETAIL ── */
 var hwDetails = {
-  keyboard:'⌨️ <strong>Keyboard (ကီးဘုတ်)</strong><br>သင်ရိုက်တဲ့ Key တိုင်းဟာ electrical signal အဖြစ် CPU ဆီ ရောက်ပါတယ်။ QWERTY layout ဟာ 1868 မှာ Typewriter ခေတ်မှ ဆင်းသက်လာပြီး ကမ္ဘာ Standard ဖြစ်နေဆဲပါ! Key အရေအတွက် 104 ခု ရှိပါတယ်!',
-  mouse:'🖱 <strong>Mouse (မောက်ကိုင်)</strong><br>Mouse ကို Douglas Engelbart က 1964 မှာ Wood နဲ့ တီထွင်ခဲ့တယ်! ယနေ့ Optical Mouse တွေကတော့ LED Light နဲ့ Sensor ကို သုံးပြီး တစ်စက္ကန့် 1000+ ကြိမ် ဖတ်ကာ Cursor ကို ရွှေ့ပါတယ်!',
-  mic:'🎤 <strong>Microphone (မိုက်ခ်)</strong><br>မင်းရဲ့ အသံ (Sound Waves) ကို Diaphragm ဆိုတဲ့ thin membrane က vibrate ဖြစ်ကာ Electrical Signal အဖြစ် ပြောင်းပြီး Digital Data ဖြစ်သွားတယ်! Zoom call, Recording အားလုံး ဒီပုံစံပဲ!',
+  keyboard:'⌨️ <strong>Keyboard </strong><br>သင်ရိုက်တဲ့ Key တိုင်းဟာ electrical signal အဖြစ် CPU ဆီ ရောက်ပါတယ်။ QWERTY layout ဟာ 1868 မှာ Typewriter ခေတ်မှ ဆင်းသက်လာပြီး ကမ္ဘာ Standard ဖြစ်နေဆဲပါ! Key အရေအတွက် 104 ခု ရှိပါတယ်!',
+  mouse:'🖱 <strong>Mouse </strong><br>Mouse ကို Douglas Engelbart က 1964 မှာ Wood နဲ့ တီထွင်ခဲ့တယ်! ယနေ့ Optical Mouse တွေကတော့ LED Light နဲ့ Sensor ကို သုံးပြီး တစ်စက္ကန့် 1000+ ကြိမ် ဖတ်ကာ Cursor ကို ရွှေ့ပါတယ်!',
+  mic:'🎤 <strong>Microphone </strong><br>မင်းရဲ့ အသံ (Sound Waves) ကို Diaphragm ဆိုတဲ့ thin membrane က vibrate ဖြစ်ကာ Electrical Signal အဖြစ် ပြောင်းပြီး Digital Data ဖြစ်သွားတယ်! Zoom call, Recording အားလုံး ဒီပုံစံပဲ!',
   webcam:'📸 <strong>Webcam</strong><br>Webcam မှာ Image Sensor (CMOS chip) ရှိပြီး တစ်စက္ကန့်မှာ 30-60 Frame ရိုက်ကူးပြီး Digital Video Data အဖြစ် ပြောင်းကာ Internet ကနေ ပို့ပေးပါတယ်!'
 };
 function showHwDetail(k){var d=document.getElementById('hw-detail');d.style.display='block';d.innerHTML=hwDetails[k]||'';}
@@ -943,7 +942,7 @@ function submitQuiz(){
   var emoji='😢',title='ကြိုးစားဦးနော်!';
   if(score===10){emoji='🏆';title='Perfect Score! ⭐ Star!';}else if(score>=8){emoji='🌟';title='အလွန်ကောင်းတယ်!';}else if(score>=6){emoji='😊';title='ကောင်းပါတယ်!';}else if(score>=4){emoji='💪';title='ထပ်ကြိုးစားပါ!';}
   var pct=Math.round(score/QUIZ_COUNT*100);
-  var msg=score===10?'💯 Perfect! မေးခွန်း ၆၀ ထဲမှ Random ၁၀ ဖြေပြီး အကုန်မှန်ပါတယ်!':score>=8?'🌟 '+pct+'%! ကောင်းမွန်သော နားလည်မှု!':score>=6?'👍 '+pct+'%! Chapters ပြန်ဖတ်ပြီး Score တိုးချင့်ပါ!':'📖 '+pct+'% — Retry နှိပ်ပြီး ထပ်ကြိုးစားပါ!';
+  var msg=score===10?'💯 Perfect! မေးခွန်း ၆၀ ထဲမှ Random ၁၀ ဖြေပြီး အကုန်မှန်ပါတယ်!':score>=8?'🌟 '+pct+'%! ကောင်းမွန်သော နားလည်မှု!':score>=6?'👍 '+pct+'%! Chapters ပြန်ဖတ်ပြီး Score တိုးမြင့်ပါ!':'📖 '+pct+'% — Retry နှိပ်ပြီး ထပ်ကြိုးစားပါ!';
   document.getElementById('score-emoji').textContent=emoji;
   document.getElementById('score-title').textContent=title+' ('+score+'/'+QUIZ_COUNT+')';
   document.getElementById('score-msg').textContent=msg;
